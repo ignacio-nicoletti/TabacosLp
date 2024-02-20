@@ -1,0 +1,21 @@
+.containNavbar {
+  background-color: #906341;
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 3rem;
+}
+.logo img {
+  width: 100px;
+}
+
+.options {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}

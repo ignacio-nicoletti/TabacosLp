@@ -1,0 +1,76 @@
+.containLogin {
+  display: flex;
+  justify-content: center;
+  background-color: #603e20;
+  height: 100vh;
+}
+
+.markLogin {
+  display: flex;
+  flex-direction: column;
+  background-color: #906341;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 400px;
+  margin-top: 5rem;
+  border-radius: 15px;
+  padding: 1rem;
+}
+.markLogin h3 {
+  font-size: 3rem;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.title {
+  width: 55%;
+  margin-bottom: 0;
+  text-align: start;
+  font-size: 2rem;
+  color: white;
+}
+
+.markLogin input {
+  /* width: 50%; */
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.markLogin button {
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem;
+  cursor: pointer;
+  background-color: white;
+}
+
+.markLogin button:hover {
+  background-color: rgb(209, 209, 209);
+}
+
+.passwordContain {
+  width: 100%;
+}
+
+.password {
+  display: flex;
+  align-items: center;
+  width: 1005;
+}
+.password input {
+  width: 80%;
+}
+.password svg{
+    cursor: pointer;
+}
+
+.email {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.email input {
+  width: 80%;
+}
