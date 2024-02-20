@@ -1,11 +1,11 @@
-import style from './navbar.module.css';
+import style from './NavbarAdmin.module.css';
 import logo from '../../Assets/logoT.png';
 import {NavLink} from 'react-router-dom';
-import {useEffect, useState} from 'react';
 import {GetDecodedCookie} from '../../utils/DecodedCookie';
-import Cookies from 'js-cookie';
+import {useEffect, useState} from 'react';
+import Cookies from "js-cookie";
 
-const NavBar = () => {
+const NavBarAdmin = () => {
   const [login, setLogin] = useState (false);
 
   useEffect (() => {
@@ -15,12 +15,14 @@ const NavBar = () => {
     } else {
       setLogin (false);
     }
+   
   }, []);
 
-  const handlerCloseSession = () => {
-    Cookies.remove ('cookieToken');
-    window.location.href = '/login';
-  };
+const handlerCloseSession=()=>{
+    Cookies.remove("cookieToken");
+    window.location.href = "/login";
+}
+
 
   return (
     <div className={style.containNavbar}>
@@ -29,18 +31,18 @@ const NavBar = () => {
       </div>
 
       <div className={style.options}>
-        <NavLink to="/" className={style.link}>
+        <NavLink to="/admin/home" className={style.link}>
           <p>Inicio</p>
         </NavLink>
-        {login === false
+        {login===false
           ? <NavLink to="/login" className={style.link}>
               <p>Ingresar</p>
             </NavLink>
           : <NavLink to="/login" className={style.link}>
-              <p onClick={handlerCloseSession}>cerrar sesion</p>
-            </NavLink>}
+          <p onClick={handlerCloseSession}>cerrar sesion</p>
+        </NavLink>}
       </div>
     </div>
   );
 };
-export default NavBar;
+export default NavBarAdmin;

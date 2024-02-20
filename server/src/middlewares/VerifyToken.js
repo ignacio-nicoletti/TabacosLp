@@ -12,13 +12,17 @@ export const verifyToken = async (req, res, next) => {
 
   try {
     const decoded = verify(token, process.env.TOKEN_SECRET); //extrae del token
+
     req.userId = decoded.value;
     let user;
-    // user = await User.findById(req.userId, { password: 0 });
-    if (!user) user = await Admin.findById(req.userId, { password: 0 });
-    if (!user)
-      return res.redirect(303, `${process.env.DEPLOY_CLIENT_URL}/login`);
+    user = await User.findById(req.userId, { password: 0 });
 
+    if (!user) {
+      user = await Admin.findById(req.userId, { password: 0 });
+    }
+    if (!user) {
+      return res.redirect(303, `${process.env.DEPLOY_CLIENT_URL}/login`);
+    }
     if (!user.verify) {
       // sendConfirmationEmail(token);
       throw new Error("Confirma tu email");

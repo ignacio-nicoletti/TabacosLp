@@ -25,7 +25,7 @@ export const createAdmin = async (req, res) => {
 
 export const getAllAdmin = async (req, res) => {
   try {
-    let admins = await Admin.find();
+    let admins = await Admin.find().select("-password");;
     res.status(200).json({ admins });
   } catch (error) {
     res.status(400).json(formatError(error.message));
@@ -35,7 +35,7 @@ export const getAllAdmin = async (req, res) => {
 export const getAdminById = async (req, res) => {
   const { id } = req.params;
   try {
-    let admin = await Admin.findById(id);
+    let admin = await Admin.findById(id).select("-password");;
     res.status(200).json(admin);
   } catch (error) {
     res.status(400).json(formatError(error.message));

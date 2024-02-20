@@ -8,6 +8,7 @@ import AdminRoute from "./src/routes/admin.routes.js"
 import authRouter from "./src/routes/auth.routes.js";
 import productRoute from "./src/routes/product.routes.js";
 import invoiceRoute from "./src/routes/invoice.routes.js";
+import userRouter from "./src/routes/user.routes.js";
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use(express.json());
 
 app.use("/", authRouter);
 app.use("/admin",AdminRoute);
+app.use("/user", userRouter);
 app.use("/products", productRoute);
 app.use("/invoice",invoiceRoute);
 

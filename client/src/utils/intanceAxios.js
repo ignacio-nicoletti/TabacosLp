@@ -26,7 +26,7 @@ async function InstanceOfAxios(
       data: datos,
       headers: {
         ...axiosInstance.defaults.headers, // Copiar encabezados comunes
-        Authorization: `Bearer ${token}`, // Añadir token al encabezado
+        "user-token": token, // Añadir token como "user-token"
       },
       // Otras opciones específicas de la petición
     };

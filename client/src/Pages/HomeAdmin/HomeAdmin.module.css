@@ -1,0 +1,18 @@
+.contain {
+  background-color: #603e20;
+  height: 100vh;
+}
+
+.ContainProgram {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.Program {
+  background-color: aliceblue;
+  width: 80%;
+  height: 800px;
+  border-radius: 15px;
+}

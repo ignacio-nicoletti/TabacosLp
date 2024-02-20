@@ -2,6 +2,7 @@ import {useState} from 'react';
 import NavBar from '../../components/Navbar/navbar';
 import style from './loginPage.module.css';
 import InstanceOfAxios from '../../utils/intanceAxios';
+import Cookies from 'js-cookie';
 
 const LoginPage = () => {
   const [eyesActive, setEyesActive] = useState (false);
@@ -16,15 +17,20 @@ const LoginPage = () => {
     setData ({...data, [property]: value});
   };
 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await InstanceOfAxios("/login", "POST", data).then((data) => {
+  const handleSubmit = async e => {
+    e.preventDefault ();
+    Cookies.remove ('cookieToken');//si ya hay token lo borra y actualiza
+    await InstanceOfAxios ('/login', 'POST', data).then (data => {
       document.cookie =
-        encodeURIComponent("cookieToken") +
-        "=" +
-        encodeURIComponent(data.token);
-    //   window.location.href = "/";
+        encodeURIComponent ('cookieToken') +
+        '=' +
+        encodeURIComponent (data.token);
+
+      if (data.rol === 'ROL_Admin') {
+        window.location.href = '/admin/home';
+      } else {
+        window.location.href = '/';
+      }
     });
   };
 
