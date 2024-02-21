@@ -4,6 +4,7 @@ import {NavLink} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import {GetDecodedCookie} from '../../utils/DecodedCookie';
 import Cookies from 'js-cookie';
+import Swal from "sweetalert2";
 
 const NavBar = () => {
   const [login, setLogin] = useState (false);
@@ -18,8 +19,22 @@ const NavBar = () => {
   }, []);
 
   const handlerCloseSession = () => {
-    Cookies.remove ('cookieToken');
-    window.location.href = '/login';
+
+    Swal.fire({
+      title: "¿Confirmar cierre de sesión?",
+      text: "¡Tu sesión actual se cerrará!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, cerrar sesión",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Cookies.remove("cookieToken"); 
+        window.location.href = "/login";
+      }
+    });
   };
 
   return (

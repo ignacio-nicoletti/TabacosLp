@@ -3,6 +3,7 @@ import NavBarAdmin from '../../components/NavBarAdmin/NavbarAdmin';
 
 import style from './HomeAdmin.module.css';
 import AddProduct from '../../components/AddProduct/AddProduct';
+import ProductList from '../../components/productsList/productList';
 
 const HomeAdmin = () => {
   const [option, setOption] = useState ('Facturacion');
@@ -15,7 +16,11 @@ const HomeAdmin = () => {
         <div className={style.Program}>
           <div className={style.options}>
             <div
-              className={style.buttonOptions}
+              className={
+                option === 'Facturacion'
+                  ? `${style.buttonOptions} ${style.marker}`
+                  : style.buttonOptions
+              }
               onClick={() => setOption ('Facturacion')}
             >
               <p>
@@ -23,7 +28,11 @@ const HomeAdmin = () => {
               </p>
             </div>
             <div
-              className={style.buttonOptions}
+              className={
+                option === 'Agregar Producto'
+                  ? `${style.buttonOptions} ${style.marker}`
+                  : style.buttonOptions
+              }
               onClick={() => setOption ('Agregar Producto')}
             >
               <p>
@@ -50,7 +59,9 @@ const HomeAdmin = () => {
             </div>
           </div>
           {/* ------options-------- */}
-          {option === 'Agregar Producto' ? <AddProduct /> : ''}
+          {option === 'Agregar Producto'
+            ? <AddProduct />
+            : option === 'Base de datos' ? <ProductList /> : ''}
         </div>
       </div>
 

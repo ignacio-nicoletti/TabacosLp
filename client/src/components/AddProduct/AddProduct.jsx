@@ -1,7 +1,8 @@
 import {useState} from 'react';
 import style from './AddProduct.module.css';
 import InstanceOfAxios from '../../utils/intanceAxios';
-import { GetDecodedCookie } from '../../utils/DecodedCookie';
+import {GetDecodedCookie} from '../../utils/DecodedCookie';
+import Swal from 'sweetalert2';
 const AddProduct = () => {
   const [data, setData] = useState ({
     code: ' ',
@@ -21,16 +22,38 @@ const AddProduct = () => {
     setData ({...data, [property]: value});
   };
 
-
-
   const handleSubmit = async e => {
     e.preventDefault ();
-   console.log(data);
-   const token = GetDecodedCookie ('cookieToken');
-   await InstanceOfAxios ('/products', 'POST', data,token);
+
+    if (
+      data.code !== '' &&
+      data.title !== '' &&
+      data.description !== '' &&
+      data.stock !== 0 &&
+      data.priceCost !== '' &&
+      data.priceList !== '' &&
+      data.category !== '' &&
+      data.brand !== '' &&
+      data.amount !== ''
+    ) {
+      const token = GetDecodedCookie ('cookieToken');
+      await InstanceOfAxios ('/products', 'POST', data, token);
+      Swal.fire ({
+        title: '¡Guardado!',
+        text: 'El producto se ha guardado correctamente.',
+        icon: 'success',
+      });
+      setTimeout (() => {
+        window.location.reload ();
+      }, 2000);
+    } else {
+      Swal.fire ({
+        title: 'Atencion!',
+        text: 'Faltan datos que completar.',
+        icon: 'warning',
+      });
+    }
   };
-
-
 
   return (
     <div className={style.ContainAddProduct}>
