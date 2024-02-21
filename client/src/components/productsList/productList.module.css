@@ -1,24 +1,39 @@
-
 .containData {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  .titulos, .dataList {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .titulos p, .dataList p {
-    flex: 1;
-    padding: 8px;
-    text-align: center;  /* Alinea el texto al centro, puedes ajustarlo según sea necesario */
-    border-right: 1px solid #ddd;  /* Línea de separación entre columnas */
-  }
-  
-  .titulos p:last-child, .dataList p:last-child {
-    border-right: none;  /* No aplicar borde a la última columna */
-  }
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 3rem;
+  overflow-y: scroll;
+}
+.titulos {
+  background-color: #603e20;
+  border-radius: 15px;
+  color: white;
+}
+
+.titulos,
+.dataList {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+}
+
+.titulos p,
+.dataList p {
+  flex: 1;
+  padding: 8px;
+  text-align: center; /* Alinea el texto al centro, puedes ajustarlo según sea necesario */
+  border-right: 1px solid #ddd; /* Línea de separación entre columnas */
+}
+
+.titulos p:last-child,
+.dataList p:last-child {
+  border-right: none; /* No aplicar borde a la última columna */
+}
+
+.dataList:hover{
+  background-color: white;
+  cursor: pointer;
+}

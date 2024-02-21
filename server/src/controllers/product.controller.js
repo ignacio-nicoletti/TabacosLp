@@ -2,8 +2,18 @@ import { Product } from "../models/products.js";
 import { formatError } from "../utils/formatError.js";
 
 export const createProduct = async (req, res) => {
-  const { code, title,stock,description,priceList,priceCost,category,brand,amount,image} =
-    req.body;
+  const {
+    code,
+    title,
+    stock,
+    description,
+    priceList,
+    priceCost,
+    category,
+    brand,
+    amount,
+    image,
+  } = req.body;
   try {
     let product = new Product({
       code,
@@ -45,8 +55,18 @@ export const GetProductById = async (req, res) => {
 
 export const UpdateProductById = async (req, res) => {
   const { id } = req.params;
-  const { code, title,stock,description,priceList,priceCost,category,brand,amount,image} =
-    req.body;
+  const {
+    code,
+    title,
+    stock,
+    description,
+    priceList,
+    priceCost,
+    category,
+    brand,
+    amount,
+    image,
+  } = req.body;
 
   try {
     let product = await Product.findByIdAndUpdate(
@@ -77,6 +97,34 @@ export const DeleteProductById = async (req, res) => {
     await Product.findByIdAndRemove(id);
 
     return res.status(200).json("producto eliminado");
+  } catch (error) {
+    res.status(400).json(formatError(error.message));
+  }
+};
+
+export const getAllCategories = async (req, res) => {
+  try {
+    let products = await Product.find();
+    const categoriesPrimary = new Set(products.map((el) => el.category));
+    const uniqueCategoriesPrimary = Array.from(categoriesPrimary);
+
+    return res.status(200).json({
+      categories: uniqueCategoriesPrimary,
+    });
+  } catch (error) {
+    res.status(400).json(formatError(error.message));
+  }
+};
+
+export const getAllBrands = async (req, res) => {
+  try {
+    let products = await Product.find();
+    const categoriesPrimary = new Set(products.map((el) => el.brand));
+    const uniqueCategoriesPrimary = Array.from(categoriesPrimary);
+
+    return res.status(200).json({
+      brands: uniqueCategoriesPrimary,
+    });
   } catch (error) {
     res.status(400).json(formatError(error.message));
   }

@@ -1,0 +1,23 @@
+.containFilters {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1.5rem;
+}
+
+.divFilter {
+    display: flex;
+    align-items: center;
+}
+.divFilter svg{
+    cursor: pointer;
+}
+
+.divFilter input {
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.divFilter select {
+  padding: 1rem;
+  border-radius: 10px;
+}

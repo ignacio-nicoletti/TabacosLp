@@ -19,7 +19,7 @@ const AddProduct = () => {
   const handlerData = event => {
     const property = event.target.name;
     const value = event.target.value;
-    setData ({...data, [property]: value});
+    setData ({...data, [property]: value[0].toUpperCase() + value.slice(1)});
   };
 
   const handleSubmit = async e => {
@@ -43,9 +43,6 @@ const AddProduct = () => {
         text: 'El producto se ha guardado correctamente.',
         icon: 'success',
       });
-      setTimeout (() => {
-        window.location.reload ();
-      }, 2000);
     } else {
       Swal.fire ({
         title: 'Atencion!',
