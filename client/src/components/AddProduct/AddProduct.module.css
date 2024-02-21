@@ -1,0 +1,41 @@
+.ContainAddProduct {
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  border: 1px solid black;
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 15px;
+}
+
+.block {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 15px;
+}
+
+.divInput {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 2rem;
+  gap: 10px;
+}
+
+.divInput input {
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 16px;
+  width: 80%;
+}
+
+.ContainAddProduct button {
+  font-size: 2rem;
+  border-radius: 15px;
+  padding: 1rem;
+  cursor: pointer;
+}
