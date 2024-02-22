@@ -4,6 +4,7 @@ import NavBarAdmin from '../../components/NavBarAdmin/NavbarAdmin';
 import style from './HomeAdmin.module.css';
 import AddProduct from '../../components/AddProduct/AddProduct';
 import ProductList from '../../components/productsList/productList';
+import Facturacion from '../../components/Facturation/Facturation';
 
 const HomeAdmin = () => {
   const [option, setOption] = useState ('Facturacion');
@@ -61,7 +62,9 @@ const HomeAdmin = () => {
           {/* ------options-------- */}
           {option === 'Agregar Producto'
             ? <AddProduct />
-            : option === 'Base de datos' ? <ProductList /> : ''}
+            : option === 'Base de datos'
+                ? <ProductList />
+                : option === 'Facturacion' ? <Facturacion /> : ''}
         </div>
       </div>
 

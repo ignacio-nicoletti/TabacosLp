@@ -15,9 +15,21 @@ const ProductList = () => {
     code: '',
     title: '',
   });
-
+  const [filterCategorie, setFilterCategorie] = useState ([]);
+  const [filterBrands, setFilterBrands] = useState ([]);
   const [productSelect, setProductSelect] = useState ({});
   const [editActive, setEditActive] = useState (false);
+
+
+  useEffect (() => {
+    InstanceOfAxios ('/products/categories', 'GET').then (data =>
+      setFilterCategorie (data.categories)
+    );
+    InstanceOfAxios ('/products/brands', 'GET').then (data =>
+      setFilterBrands (data.brands)
+    );
+  }, []);
+
 
   const ProductRow = ({product}) => (
     <div
@@ -89,7 +101,7 @@ const ProductList = () => {
 
   return (
     <div className={style.containData}>
-      <FilterDataBase data={data} filters={filters} setFilters={setFilters} />
+      <FilterDataBase data={data} filters={filters} setFilters={setFilters} filterBrands={filterBrands} filterCategorie={filterCategorie}/>
 
       <div className={style.titulos}>
         <p>Codigo</p>
@@ -99,8 +111,8 @@ const ProductList = () => {
         <p>Cantidad</p>
         <p>Categoria</p>
         <p>Stock</p>
-        <p>Precio costo</p>
-        <p>Precio lista</p>
+        <p>Precio compra</p>
+        <p>Precio venta</p>
       </div>
 
       {loading
@@ -113,6 +125,8 @@ const ProductList = () => {
         ? <EditProductModal
             setEditActive={setEditActive}
             productSelect={productSelect}
+            filterCategorie={filterCategorie}
+            filterBrands={filterBrands}
           />
         : ''}
 

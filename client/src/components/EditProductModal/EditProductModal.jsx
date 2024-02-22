@@ -4,7 +4,12 @@ import Swal from 'sweetalert2';
 import {GetDecodedCookie} from '../../utils/DecodedCookie';
 import InstanceOfAxios from '../../utils/intanceAxios';
 
-const EditProductModal = ({setEditActive, productSelect}) => {
+const EditProductModal = ({
+  setEditActive,
+  productSelect,
+  filterCategorie,
+  filterBrands,
+}) => {
   const [data, setData] = useState ({
     code: productSelect.code,
     title: productSelect.title,
@@ -27,7 +32,6 @@ const EditProductModal = ({setEditActive, productSelect}) => {
     });
   };
 
-  console.log (data);
   const handleSubmit = async e => {
     e.preventDefault ();
 
@@ -114,6 +118,10 @@ const EditProductModal = ({setEditActive, productSelect}) => {
             name="description"
           />
           <span>Marca</span>
+          <select name="brand" onChange={handlerFilters} id="brandSelect">
+            <option value="">Marca</option>
+            {filterBrands.map (el => <option key={el} value={el}>{el}</option>)}
+          </select>
           <input
             type="text"
             value={data.brand}
@@ -128,6 +136,16 @@ const EditProductModal = ({setEditActive, productSelect}) => {
             name="amount"
           />
           <span>Categoria</span>
+          <select
+            name="category"
+            onChange={handlerFilters}
+            id="categorieSelect"
+          >
+            <option value="">Categoria</option>
+            {filterCategorie.map (el => (
+              <option key={el} value={el}>{el}</option>
+            ))}
+          </select>
           <input
             type="text"
             value={data.category}

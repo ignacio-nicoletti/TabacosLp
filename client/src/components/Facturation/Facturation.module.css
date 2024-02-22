@@ -1,0 +1,105 @@
+.containProgram {
+  background-color: white;
+  margin-top: 3rem;
+  height: 100%;
+  border-radius: 15px;
+  padding: 1rem;
+}
+
+.program {
+  height: 100%;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.sideBarAndListProduct {
+  display: flex;
+  gap: 15px;
+  height: 90%;
+}
+
+.SideBar {
+  background-color: #f8efe3;
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  padding-inline: 1rem;
+  padding-top: 1rem;
+  gap: 20px;
+  border-radius: 15px;
+}
+
+.divInputs {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+}
+
+.divInputs input {
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.divFacturar button {
+  padding: 1rem;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.listProduct {
+  background-color: #f8efe3;
+  width: 90%;
+  border-radius: 15px;
+}
+
+.importe {
+  background-color: #f8efe3;
+  border-radius: 15px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem;
+  padding-right: 2rem;
+}
+
+.importeBox {
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 15px;
+  border: 3px solid black;
+}
+
+.DivProductTitles{
+    background-color: #603e20;
+    border-radius: 15px;
+    color: white;
+}
+
+.DivProductTitles,
+.divProduct {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+}
+
+.DivProductTitles p,
+.divProduct p,
+.divProduct input {
+  flex: 1;
+  padding: 8px;
+  text-align: center; /* Alinea el texto al centro, puedes ajustarlo según sea necesario */
+  border-right: 1px solid #ddd; /* Línea de separación entre columnas */
+}
+
+.DivProductTitles p:last-child,
+.divProduct p:last-child {
+  border-right: none; /* No aplicar borde a la última columna */
+}
+

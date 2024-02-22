@@ -1,20 +1,13 @@
-import {useEffect, useState} from 'react';
 import style from './filterDataBase.module.css';
-import InstanceOfAxios from '../../utils/intanceAxios';
 
-const FilterDataBase = ({filters,setFilters}) => {
-  const [filterCategorie, setFilterCategorie] = useState ([]);
-  const [filterBrands, setFilterBrands] = useState ([]);
-
-
-  useEffect (() => {
-    InstanceOfAxios ('/products/categories', 'GET').then (data =>
-      setFilterCategorie (data.categories)
-    );
-    InstanceOfAxios ('/products/brands', 'GET').then (data =>
-      setFilterBrands (data.brands)
-    );
-  }, []);
+const FilterDataBase = ({
+  filters,
+  setFilters,
+  filterCategorie,
+  filterBrands,
+ 
+}) => {
+ 
 
   const handlerFilters = event => {
     const property = event.target.name;

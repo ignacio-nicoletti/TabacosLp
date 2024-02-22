@@ -4,6 +4,7 @@ import InstanceOfAxios from '../../utils/intanceAxios';
 import {GetDecodedCookie} from '../../utils/DecodedCookie';
 import Swal from 'sweetalert2';
 import {useEffect} from 'react';
+
 const AddProduct = () => {
   const [data, setData] = useState ({
     code: ' ',
@@ -34,10 +35,8 @@ const AddProduct = () => {
       setListCaterogie (data.categories)
     );
     InstanceOfAxios ('/products/brands', 'GET').then (data =>
-      setListBrand (data.brands),
-    console.log(data)
-      );
-
+      setListBrand (data.brands)
+    );
   }, []);
 
   const handleSubmit = async e => {
@@ -62,6 +61,9 @@ const AddProduct = () => {
         text: 'El producto se ha guardado correctamente.',
         icon: 'success',
       });
+      setTimeout (() => {
+        window.location.reload ();
+      }, 2000);
     } else {
       Swal.fire ({
         title: 'Atencion!',
@@ -70,7 +72,6 @@ const AddProduct = () => {
       });
     }
   };
-
 
   return (
     <div className={style.ContainAddProduct}>
@@ -98,12 +99,12 @@ const AddProduct = () => {
         </div>
 
         <div className={style.divInput}>
-          <span> Precio de costo</span>
+          <span> Precio de compra</span>
           <input type="number" name="priceCost" onChange={handlerData} />
         </div>
 
         <div className={style.divInput}>
-          <span> Precio de lista</span>
+          <span> Precio de venta</span>
           <input type="number" name="priceList" onChange={handlerData} />
         </div>
       </div>
@@ -112,6 +113,7 @@ const AddProduct = () => {
         <div className={style.divInput}>
           <span> Categoria</span>
           <select name="category" id="" onChange={handlerData}>
+            <option value="" />
             {listCategorie.map (el => <option value={el}>{el}</option>)}
           </select>
           <input
@@ -125,14 +127,25 @@ const AddProduct = () => {
         <div className={style.divInput}>
           <span> Marca</span>
           <select name="brand" id="" onChange={handlerData}>
+            <option value="" />
             {listBrand.map (el => <option value={el}>{el}</option>)}
           </select>
-          <input type="text" name="brand"value={data.brand} onChange={handlerData} />
+          <input
+            type="text"
+            name="brand"
+            value={data.brand}
+            onChange={handlerData}
+          />
         </div>
 
         <div className={style.divInput}>
           <span>Cantidad(Gr,lt)</span>
-          <input type="text" name="amount" onChange={handlerData} />
+          <input
+            type="text"
+            name="amount"
+            onChange={handlerData}
+            placeholder="Ej. 30gr "
+          />
         </div>
       </div>
 
