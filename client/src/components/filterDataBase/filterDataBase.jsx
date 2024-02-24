@@ -1,5 +1,7 @@
 import {useState} from 'react';
 import style from './filterDataBase.module.css';
+import {GetDecodedCookie} from '../../utils/DecodedCookie';
+import InstanceOfAxios from '../../utils/intanceAxios';
 
 const FilterDataBase = ({
   filters,
@@ -9,8 +11,9 @@ const FilterDataBase = ({
 }) => {
   const [activePriceModal, setActivePriceModal] = useState (false);
   const [inputs, setInputs] = useState ({
-    priceCost: null,
-    priceList: null,
+    priceCostPercentage: null,
+    priceListPercentage: null,
+    Action: 'Sum',
   });
 
   const handlerInputs = event => {
@@ -21,7 +24,7 @@ const FilterDataBase = ({
       [name]: value ? value[0].toUpperCase () + value.slice (1) : '',
     });
   };
-  console.log (inputs);
+
   const handlerFilters = event => {
     const property = event.target.name;
     const value = event.target.value;
@@ -32,7 +35,10 @@ const FilterDataBase = ({
     });
   };
 
-  const handlerModifPrice = () => {};
+  const handlerModifPrice = () => {
+    const token = GetDecodedCookie ('cookieToken');
+    InstanceOfAxios ('/products', 'PUT', inputs, token);
+  };
 
   return (
     <div className={style.containFilters}>
@@ -139,12 +145,18 @@ const FilterDataBase = ({
               </div>
 
               <div className={style.BoxInputs}>
+
+                <select name="Action" id="" onChange={handlerInputs}>
+                  <option value="Sum">Aumentar</option>
+                  <option value="Rest">Restar</option>
+                </select>
+
                 <span>Precio de compra</span>
                 <div className={style.inputAndspan}>
                   <input
                     type="number"
                     onChange={handlerInputs}
-                    name="priceCost"
+                    name="priceCostPercentage"
                   />
                   <span> %</span>
                 </div>
@@ -154,12 +166,12 @@ const FilterDataBase = ({
                   <input
                     type="number"
                     onChange={handlerInputs}
-                    name="priceList"
+                    name="priceListPercentage"
                   />
                   {' '}
                   <span> %</span>
                 </div>
-                <button>Guardar</button>
+                <button onClick={() => handlerModifPrice ()}>Guardar</button>
               </div>
             </div>
           </div>

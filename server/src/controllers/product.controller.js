@@ -129,3 +129,52 @@ export const getAllBrands = async (req, res) => {
     res.status(400).json(formatError(error.message));
   }
 };
+
+export const EditPriceAllProducts = async (req, res) => {
+  try {
+    const { priceListPercentage, priceCostPercentage, Action } = req.body;
+    console.log(req.body);
+
+    let priceListIncrease = 0;
+    let priceCostIncrease = 0;
+
+    // Ensure that the percentages are valid numbers
+    if (priceListPercentage) {
+      const parsedPriceListPercentage = parseFloat(priceListPercentage);
+      if (isNaN(parsedPriceListPercentage)) {
+        throw new Error("Invalid percentage values");
+      }
+      priceListIncrease =
+        Action === "Sum"
+          ? parsedPriceListPercentage / 100
+          : -parsedPriceListPercentage / 100;
+    }
+
+    if (priceCostPercentage) {
+      const parsedPriceCostPercentage = parseFloat(priceCostPercentage);
+      if (isNaN(parsedPriceCostPercentage)) {
+        throw new Error("Invalid percentage values");
+      }
+      priceCostIncrease =
+        Action === "Sum"
+          ? parsedPriceCostPercentage / 100
+          : -parsedPriceCostPercentage / 100;
+    }
+
+    // Update all products in the database using updateMany
+    await Product.updateMany(
+      {},
+      {
+        $inc: {
+          priceList: priceListIncrease,
+          priceCost: priceCostIncrease,
+        },
+      }
+    );
+
+    return res.status(200).json({ msg: "Prices updated for all products" });
+  } catch (error) {
+    console.error("Error:", error.message);
+    res.status(400).json({ error: error.message });
+  }
+};

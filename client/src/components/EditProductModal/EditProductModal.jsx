@@ -159,14 +159,14 @@ const EditProductModal = ({
             onChange={handlerFilters}
             name="stock"
           />
-          <span>Precio costo</span>
+          <span>Precio compra</span>
           <input
             type="text"
             value={data.priceCost}
             onChange={handlerFilters}
             name="priceCost"
           />
-          <span>Precio lista</span>
+          <span>Precio venta</span>
           <input
             type="text"
             value={data.priceList}

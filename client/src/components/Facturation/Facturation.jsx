@@ -142,7 +142,16 @@ const Facturacion = () => {
             <div className={style.divInputs}>
               <span>Cantidad</span>
               <input
-                type="text"
+                type="number"
+                value={filter.cant}
+                onChange={handlerFilters}
+                name="cant"
+              />
+            </div>
+            <div className={style.divInputs}>
+              <span>Generico</span>
+              <input
+                type="number"
                 value={filter.cant}
                 onChange={handlerFilters}
                 name="cant"

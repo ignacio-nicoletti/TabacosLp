@@ -1,4 +1,5 @@
 import { Invoice } from "../models/invoice.js";
+import { Product } from "../models/products.js";
 import { formatError } from "../utils/formatError.js";
 
 export const createInvoice = async (req, res) => {
@@ -11,9 +12,19 @@ export const createInvoice = async (req, res) => {
 
     let invoice = new Invoice({
       date: currentDate,
-      products:List,
-      priceTotal:total,
+      products: List,
+      priceTotal: total,
     });
+
+    for (const el of List) {
+      const product = await Product.findById(el._id);
+      const currentStock = product.stock;
+
+      await Product.findByIdAndUpdate(el._id, {
+        stock: currentStock - el.unity,
+      });
+    }
+
     await invoice.save();
     return res.status(200).json({ msg: "invoice creado" });
   } catch (error) {

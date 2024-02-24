@@ -1,79 +1,79 @@
 .containInvoice {
-    margin-top: 1rem;
-  }
-  
-  .ContainTitulos {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .titulos {
-    display: flex;
-    justify-content: space-between;
-    background-color: #603e20;
-    border-radius: 15px;
-    color: white;
-  }
-  
-  .titulos p {
-    flex: 1;
-    text-align: center;
-  }
-  
-  .titulos p:not(:last-child) {
-    border-right: 1px solid #ddd;
-  }
-  
-  .dataList {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    align-items: center;
-  }
-  
-  .dataList:hover {
-    background-color: white;
-    cursor: pointer;
-  }
-  
-  .dataList p {
-    border-inline: 1px solid #ddd;
-    flex: 1;
-    text-align: center;
-  }
-  
-  .productBox {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    justify-content: center;
-  }
-  
-  .productBox p {
-    border: none;
-  }
-  
-  .productItem {
-    display: flex;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .productItem:last-child {
-    border-bottom: none;
-  }
-  
-  .productBox:last-child {
-    border-right: 1px solid #ddd;
-  }
-  
-  .dataList p:first-child {
-    border-left: none;
-  }
-  
-  .dataList p:last-child {
-    border-right: none;
-    border: none;
-  }
-  
+  margin-top: 1rem;
+  overflow-y: scroll;
+}
+
+.ContainTitulos {
+  display: flex;
+  flex-direction: column;
+}
+
+.titulos {
+  display: flex;
+  justify-content: space-between;
+  background-color: #603e20;
+  border-radius: 15px;
+  color: white;
+}
+
+.titulos p {
+  flex: 1;
+  text-align: center;
+}
+
+.titulos p:not(:last-child) {
+  border-right: 1px solid #ddd;
+}
+
+.dataList {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  align-items: center;
+}
+
+.dataList:hover {
+  background-color: white;
+  cursor: pointer;
+}
+
+.dataList p {
+  border-inline: 1px solid #ddd;
+  flex: 1;
+  text-align: center;
+}
+
+.productBox {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+}
+
+.productBox p {
+  border: none;
+}
+
+.productItem {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+}
+
+.productItem:last-child {
+  border-bottom: none;
+}
+
+.productBox:last-child {
+  border-right: 1px solid #ddd;
+}
+
+.dataList p:first-child {
+  border-left: none;
+}
+
+.dataList p:last-child {
+  border-right: none;
+  border: none;
+}

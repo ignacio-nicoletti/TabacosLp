@@ -28,20 +28,22 @@ const Invoice = () => {
     fetchData ();
   }, []);
 
-const formatDateModal = isoDate => {
-  const date = new Date(isoDate);
-  const options = {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    timeZone: 'UTC' // Establece la zona horaria UTC para la fecha de entrada
-  };
+  const formatDateModal = isoDate => {
+    const date = new Date (isoDate);
+    const options = {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: 'UTC', // Establece la zona horaria UTC para la fecha de entrada
+    };
 
-  const formattedDate = new Intl.DateTimeFormat('es-AR', options).format(date);
-  return formattedDate;
-};
+    const formattedDate = new Intl.DateTimeFormat ('es-AR', options).format (
+      date
+    );
+    return formattedDate;
+  };
 
   const formatNumberWithDots = number => {
     const formattedNumber = new Intl.NumberFormat ('es-ES', {
@@ -78,6 +80,10 @@ const formatDateModal = isoDate => {
         {loading
           ? <p>Loading...</p>
           : <div>
+
+              <div>
+                filtros
+              </div>
 
               <div className={style.titulos}>
                 <p>Codigo Factura</p>
