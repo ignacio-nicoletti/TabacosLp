@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import style from './filterDataBase.module.css';
 
 const FilterDataBase = ({
@@ -5,10 +6,22 @@ const FilterDataBase = ({
   setFilters,
   filterCategorie,
   filterBrands,
- 
 }) => {
- 
+  const [activePriceModal, setActivePriceModal] = useState (false);
+  const [inputs, setInputs] = useState ({
+    priceCost: null,
+    priceList: null,
+  });
 
+  const handlerInputs = event => {
+    const {name, value} = event.target;
+
+    setInputs ({
+      ...inputs,
+      [name]: value ? value[0].toUpperCase () + value.slice (1) : '',
+    });
+  };
+  console.log (inputs);
   const handlerFilters = event => {
     const property = event.target.name;
     const value = event.target.value;
@@ -18,6 +31,8 @@ const FilterDataBase = ({
       [property]: value ? value[0].toUpperCase () + value.slice (1) : '',
     });
   };
+
+  const handlerModifPrice = () => {};
 
   return (
     <div className={style.containFilters}>
@@ -93,6 +108,62 @@ const FilterDataBase = ({
           ))}
         </select>
       </div>
+
+      <div className={style.DivModifPrice}>
+        <button onClick={() => setActivePriceModal (true)}>
+          Modificar precios
+        </button>
+      </div>
+
+      {activePriceModal
+        ? <div className={style.ContainModifPriceModal}>
+            <div className={style.ModifPriceModal}>
+              <div className={style.iconClose}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-x"
+                  width="36"
+                  height="36F"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  onClick={() => setActivePriceModal (false)}
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M18 6l-12 12" />
+                  <path d="M6 6l12 12" />
+                </svg>
+              </div>
+
+              <div className={style.BoxInputs}>
+                <span>Precio de compra</span>
+                <div className={style.inputAndspan}>
+                  <input
+                    type="number"
+                    onChange={handlerInputs}
+                    name="priceCost"
+                  />
+                  <span> %</span>
+                </div>
+                <span>Precio de venta</span>
+
+                <div className={style.inputAndspan}>
+                  <input
+                    type="number"
+                    onChange={handlerInputs}
+                    name="priceList"
+                  />
+                  {' '}
+                  <span> %</span>
+                </div>
+                <button>Guardar</button>
+              </div>
+            </div>
+          </div>
+        : ''}
 
     </div>
   );

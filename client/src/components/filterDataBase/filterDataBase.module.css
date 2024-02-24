@@ -5,11 +5,11 @@
 }
 
 .divFilter {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
-.divFilter svg{
-    cursor: pointer;
+.divFilter svg {
+  cursor: pointer;
 }
 
 .divFilter input {
@@ -20,4 +20,73 @@
 .divFilter select {
   padding: 1rem;
   border-radius: 10px;
+}
+
+.DivModifPrice {
+  display: flex;
+  align-items: center;
+}
+.DivModifPrice button {
+  padding: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.ContainModifPriceModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ModifPriceModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #906341;
+  padding: 20px;
+  border: 3px solid black;
+  width: 80%;
+  max-width: 400px;
+  max-height: 600px;
+  border-radius: 10px;
+}
+
+.iconClose {
+  display: flex;
+  justify-content: flex-end;
+}
+.iconClose svg {
+  cursor: pointer;
+}
+
+.BoxInputs {
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.inputAndspan input {
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 15px;
+  width: 100%;
+}
+
+.inputAndspan {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.BoxInputs button {
+  font-size: 1.5rem;
+  padding: 1rem;
+  border-radius: 15px;
+  width: 100%;
+  cursor: pointer;
 }
