@@ -4,8 +4,8 @@ const InvoiceSchema = new mongoose.Schema({
   date: {
     type: Date,
   },
-  product: {
-    type: Object,
+  products: {
+    type: Array,
   },
   priceTotal:{
     type:Number

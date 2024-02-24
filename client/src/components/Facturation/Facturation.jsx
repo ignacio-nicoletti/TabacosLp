@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import style from './Facturation.module.css';
 import InstanceOfAxios from '../../utils/intanceAxios';
+import { GetDecodedCookie } from '../../utils/DecodedCookie';
 
 const Facturacion = () => {
   const [data, setData] = useState ([]);
@@ -22,35 +23,35 @@ const Facturacion = () => {
 
   const HandlerFacturacion = () => {
     try {
-      let filteredData = data.filter(
-        (el) => String(el.code) === String(filter.code)
+      let filteredData = data.filter (
+        el => String (el.code) === String (filter.code)
       );
-  
+
       if (filteredData.length > 0) {
-        filteredData = filteredData.map((item) => ({
+        filteredData = filteredData.map (item => ({
           ...item,
           unity: filter.cant,
         }));
-  
-        let productIndex = List.findIndex(
-          (el) => String(el.code) === String(filteredData[0].code)
+
+        let productIndex = List.findIndex (
+          el => String (el.code) === String (filteredData[0].code)
         );
-  
+
         if (productIndex >= 0) {
           // Product already exists, update the unity property by adding the quantity
-          List[productIndex].unity = Number(List[productIndex].unity) + Number(filter.cant);
-          setList([...List]); // Update the state with the modified List
+          List[productIndex].unity =
+            Number (List[productIndex].unity) + Number (filter.cant);
+          setList ([...List]); // Update the state with the modified List
         } else {
           // Product doesn't exist, add it to the list
-          setList([...List, ...filteredData]);
+          setList ([...List, ...filteredData]);
         }
-        setFilter({ ...filter, code: '' });
+        setFilter ({...filter, code: ''});
       }
     } catch (error) {
-      console.error('Error handling facturation:', error);
+      console.error ('Error handling facturation:', error);
     }
   };
-  
 
   const Calculartotal = () => {
     let totalData = List.map (el => ({
@@ -100,7 +101,7 @@ const Facturacion = () => {
       handlerEditUnity ();
       Calculartotal ();
     },
-    [List,Calculartotal,handlerEditUnity]
+    [List, Calculartotal, handlerEditUnity]
   );
 
   const handleCheckboxChange = index => {
@@ -113,6 +114,12 @@ const Facturacion = () => {
     // Filter out selected items from the list
     const updatedList = List.filter (el => !el.selected);
     setList (updatedList);
+  };
+
+  const handlerSubmit = () => {
+    const token = GetDecodedCookie ('cookieToken');
+    InstanceOfAxios ('/invoice', 'POST', {List, total}, token);
+    setList([])
   };
 
   return (
@@ -143,7 +150,7 @@ const Facturacion = () => {
             </div>
 
             <div className={style.divFacturar}>
-              <button>Facturar</button>
+              <button onClick={handlerSubmit}>Facturar</button>
             </div>
 
           </div>

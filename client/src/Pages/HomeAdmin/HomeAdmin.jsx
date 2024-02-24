@@ -5,6 +5,7 @@ import style from './HomeAdmin.module.css';
 import AddProduct from '../../components/AddProduct/AddProduct';
 import ProductList from '../../components/productsList/productList';
 import Facturacion from '../../components/Facturation/Facturation';
+import Invoice from '../../components/invoice/invoice';
 
 const HomeAdmin = () => {
   const [option, setOption] = useState ('Facturacion');
@@ -64,7 +65,9 @@ const HomeAdmin = () => {
             ? <AddProduct />
             : option === 'Base de datos'
                 ? <ProductList />
-                : option === 'Facturacion' ? <Facturacion /> : ''}
+                : option === 'Facturacion'
+                    ? <Facturacion />
+                    : option === 'Ventas' ? <Invoice /> : ''}
         </div>
       </div>
 

@@ -2,16 +2,17 @@ import { Invoice } from "../models/invoice.js";
 import { formatError } from "../utils/formatError.js";
 
 export const createInvoice = async (req, res) => {
-  const { product, priceTotal } = req.body;
+  const { List, total } = req.body;
   try {
+    console.log(req.body);
     let currentDate = new Date();
     const timeZoneOffset = -3; // La diferencia de la zona horaria en horas
     currentDate.setHours(currentDate.getHours() + timeZoneOffset);
 
     let invoice = new Invoice({
       date: currentDate,
-      product,
-      priceTotal,
+      products:List,
+      priceTotal:total,
     });
     await invoice.save();
     return res.status(200).json({ msg: "invoice creado" });
