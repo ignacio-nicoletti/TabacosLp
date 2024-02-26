@@ -130,51 +130,33 @@ export const getAllBrands = async (req, res) => {
   }
 };
 
+
 export const EditPriceAllProducts = async (req, res) => {
   try {
-    const { priceListPercentage, priceCostPercentage, Action } = req.body;
+    const { priceListPercentage, priceCostPercentage } = req.body;
     console.log(req.body);
 
-    let priceListIncrease = 0;
-    let priceCostIncrease = 0;
+    const products = await Product.find();
 
-    // Ensure that the percentages are valid numbers
-    if (priceListPercentage) {
-      const parsedPriceListPercentage = parseFloat(priceListPercentage);
-      if (isNaN(parsedPriceListPercentage)) {
-        throw new Error("Invalid percentage values");
-      }
-      priceListIncrease =
-        Action === "Sum"
-          ? parsedPriceListPercentage / 100
-          : -parsedPriceListPercentage / 100;
-    }
+    products.forEach(async (product) => {
+      let priceList = product.priceList;
+      let priceCost = product.priceCost;
 
-    if (priceCostPercentage) {
-      const parsedPriceCostPercentage = parseFloat(priceCostPercentage);
-      if (isNaN(parsedPriceCostPercentage)) {
-        throw new Error("Invalid percentage values");
-      }
-      priceCostIncrease =
-        Action === "Sum"
-          ? parsedPriceCostPercentage / 100
-          : -parsedPriceCostPercentage / 100;
-    }
+      priceList += priceList * (priceListPercentage / 100);
+      priceCost += priceCost * (priceCostPercentage / 100);
 
-    // Update all products in the database using updateMany
-    await Product.updateMany(
-      {},
-      {
-        $inc: {
-          priceList: priceListIncrease,
-          priceCost: priceCostIncrease,
+      // Actualizar el producto en la base de datos
+      await Product.findByIdAndUpdate(product._id, {
+        $set: {
+          priceList: Math.max(priceList, 0),
+          priceCost: Math.max(priceCost, 0),
         },
-      }
-    );
+      });
+    });
 
-    return res.status(200).json({ msg: "Prices updated for all products" });
+    return res.status(200).json({ message: 'Precios actualizados correctamente' });
   } catch (error) {
     console.error("Error:", error.message);
-    res.status(400).json({ error: error.message });
+    return res.status(500).json({ error: 'Error interno del servidor' });
   }
 };

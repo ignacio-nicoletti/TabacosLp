@@ -5,7 +5,6 @@ import { formatError } from "../utils/formatError.js";
 export const createInvoice = async (req, res) => {
   const { List, total } = req.body;
   try {
-    console.log(req.body);
     let currentDate = new Date();
     const timeZoneOffset = -3; // La diferencia de la zona horaria en horas
     currentDate.setHours(currentDate.getHours() + timeZoneOffset);
@@ -17,12 +16,15 @@ export const createInvoice = async (req, res) => {
     });
 
     for (const el of List) {
-      const product = await Product.findById(el._id);
-      const currentStock = product.stock;
+      // Check if the element has an '_id' property before updating stock
+      if (el._id) {
+        const product = await Product.findById(el._id);
+        const currentStock = product.stock;
 
-      await Product.findByIdAndUpdate(el._id, {
-        stock: currentStock - el.unity,
-      });
+        await Product.findByIdAndUpdate(el._id, {
+          stock: currentStock - el.unity,
+        });
+      }
     }
 
     await invoice.save();

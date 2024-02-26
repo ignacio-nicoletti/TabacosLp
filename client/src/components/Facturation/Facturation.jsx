@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import style from './Facturation.module.css';
 import InstanceOfAxios from '../../utils/intanceAxios';
-import { GetDecodedCookie } from '../../utils/DecodedCookie';
+import {GetDecodedCookie} from '../../utils/DecodedCookie';
 
 const Facturacion = () => {
   const [data, setData] = useState ([]);
@@ -9,6 +9,7 @@ const Facturacion = () => {
   const [filter, setFilter] = useState ({
     code: '',
     cant: 1,
+    importe: 1,
   });
   const [total, setTotal] = useState ('');
 
@@ -87,11 +88,22 @@ const Facturacion = () => {
       let productIndex = List.findIndex (
         el => String (el.code) === String (elemento.code)
       );
-
       if (productIndex >= 0) {
-        // Product already exists, update the unity property
         List[productIndex].unity = Number (newUnity);
-        setList ([...List]); // Update the state with the modified List
+        setList ([...List]);
+      }
+    };
+  };
+
+  const handlerEditTitle = elemento => {
+    return event => {
+      const newTitle = event.target.value;
+      let productIndex = List.findIndex(
+        el => String(el.code) === String(elemento.code)
+      );
+      if (productIndex >= 0) {
+        List[productIndex].title = newTitle;
+        setList([...List]);
       }
     };
   };
@@ -117,9 +129,26 @@ const Facturacion = () => {
   };
 
   const handlerSubmit = () => {
-    const token = GetDecodedCookie ('cookieToken');
-    InstanceOfAxios ('/invoice', 'POST', {List, total}, token);
-    setList([])
+    if (List.length !== 0) {
+      const token = GetDecodedCookie ('cookieToken');
+      InstanceOfAxios ('/invoice', 'POST', {List, total}, token);
+      setList ([]);
+    }
+  };
+
+  const handleAddGenericProduct = () => {
+    setList ([
+      ...List,
+      {
+        code: null,
+        title: 'Producto Generico',
+        amount: '',
+        priceCost: null,
+        priceList: filter.importe,
+        unity: filter.cant,
+        generic: true,
+      },
+    ]);
   };
 
   return (
@@ -149,13 +178,19 @@ const Facturacion = () => {
               />
             </div>
             <div className={style.divInputs}>
-              <span>Generico</span>
+              <span>Importe</span>
               <input
                 type="number"
-                value={filter.cant}
+                value={filter.importe}
                 onChange={handlerFilters}
-                name="cant"
+                name="importe"
               />
+            </div>
+            <div className={style.divInputs}>
+              <button onClick={() => handleAddGenericProduct ()}>
+                Agregar Prod. Generico
+              </button>
+
             </div>
 
             <div className={style.divFacturar}>
@@ -187,10 +222,20 @@ const Facturacion = () => {
                     onChange={() => handleCheckboxChange (index)}
                   />
                 </p>
-                <p>{el.code}</p>
-                <p>{el.title}</p>
-                <p>{el.amount}</p>
-                <p>{el.priceCost}</p>
+                <p>{el.code ? el.code : '-'}</p>
+                <p>
+                  {el.generic
+                    ? <input
+                        type="text"
+                        
+                        id=""
+                        value={el.title}
+                        onChange={handlerEditTitle(el)}
+                      />
+                    : el.title}
+                </p>
+                <p>{el.amount ? el.amount : '-'}</p>
+                <p>{el.priceCost ? el.priceCost : '-'}</p>
                 <p>{el.priceList}</p>
                 <p>
                   <input

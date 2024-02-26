@@ -20,6 +20,7 @@ const AddProduct = () => {
 
   const [listCategorie, setListCaterogie] = useState ([]);
   const [listBrand, setListBrand] = useState ([]);
+  const [stockActive, setStockActive] = useState (true);
 
   const handlerData = event => {
     const property = event.target.name;
@@ -43,7 +44,6 @@ const AddProduct = () => {
     e.preventDefault ();
 
     if (
-      data.code !== '' &&
       data.title !== '' &&
       data.description !== '' &&
       data.stock !== 0 &&
@@ -61,9 +61,18 @@ const AddProduct = () => {
         text: 'El producto se ha guardado correctamente.',
         icon: 'success',
       });
-      setTimeout (() => {
-        window.location.reload ();
-      }, 2000);
+
+      setData ({
+        code: ' ',
+        title: '',
+        description: '',
+        stock: '',
+        priceCost: '',
+        priceList: '',
+        category: '',
+        brand: '',
+        amount: '',
+      });
     } else {
       Swal.fire ({
         title: 'Atencion!',
@@ -78,34 +87,76 @@ const AddProduct = () => {
       <div className={style.block}>
         <div className={style.divInput}>
           <span> Codigo de barra</span>
-          <input type="text" name="code" onChange={handlerData} />
+          <input
+            type="text"
+            name="code"
+            onChange={handlerData}
+            value={data.code}
+          />
         </div>
 
         <div className={style.divInput}>
           <span> Titulo</span>
-          <input type="text" name="title" onChange={handlerData} />
+          <input
+            type="text"
+            name="title"
+            onChange={handlerData}
+            maxLength={40}
+            value={data.title}
+          />
         </div>
 
         <div className={style.divInput}>
           <span> Descripcion</span>
-          <input type="text" name="description" onChange={handlerData} />
+          <input
+            type="text"
+            name="description"
+            onChange={handlerData}
+            maxLength={45}
+            value={data.description}
+          />
         </div>
       </div>
 
       <div className={style.block}>
         <div className={style.divInput}>
-          <span> Stock</span>
-          <input type="number" name="stock" onChange={handlerData} />
+          <div className={style.divSpanAndInputCheck}>
+            <span> Stock </span>
+            <input
+              type="checkbox"
+              name=""
+              id=""
+              checked={stockActive}
+              onChange={() => setStockActive (!stockActive)}
+              />
+          </div>
+          <input
+            type="number"
+            name="stock"
+            onChange={handlerData}
+            disabled={!stockActive ? true : false}
+            value={data.stock}
+          />
         </div>
 
         <div className={style.divInput}>
           <span> Precio de compra</span>
-          <input type="number" name="priceCost" onChange={handlerData} />
+          <input
+            type="number"
+            name="priceCost"
+            onChange={handlerData}
+            value={data.priceCost}
+          />
         </div>
 
         <div className={style.divInput}>
           <span> Precio de venta</span>
-          <input type="number" name="priceList" onChange={handlerData} />
+          <input
+            type="number"
+            name="priceList"
+            onChange={handlerData}
+            value={data.priceList}
+          />
         </div>
       </div>
 
@@ -145,6 +196,7 @@ const AddProduct = () => {
             name="amount"
             onChange={handlerData}
             placeholder="Ej. 30gr "
+            value={data.amount}
           />
         </div>
       </div>

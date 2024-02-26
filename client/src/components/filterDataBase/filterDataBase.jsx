@@ -13,12 +13,10 @@ const FilterDataBase = ({
   const [inputs, setInputs] = useState ({
     priceCostPercentage: null,
     priceListPercentage: null,
-    Action: 'Sum',
   });
 
   const handlerInputs = event => {
     const {name, value} = event.target;
-
     setInputs ({
       ...inputs,
       [name]: value ? value[0].toUpperCase () + value.slice (1) : '',
@@ -28,7 +26,6 @@ const FilterDataBase = ({
   const handlerFilters = event => {
     const property = event.target.name;
     const value = event.target.value;
-
     setFilters ({
       ...filters,
       [property]: value ? value[0].toUpperCase () + value.slice (1) : '',
@@ -146,10 +143,7 @@ const FilterDataBase = ({
 
               <div className={style.BoxInputs}>
 
-                <select name="Action" id="" onChange={handlerInputs}>
-                  <option value="Sum">Aumentar</option>
-                  <option value="Rest">Restar</option>
-                </select>
+              
 
                 <span>Precio de compra</span>
                 <div className={style.inputAndspan}>

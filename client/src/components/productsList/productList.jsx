@@ -20,7 +20,6 @@ const ProductList = () => {
   const [productSelect, setProductSelect] = useState ({});
   const [editActive, setEditActive] = useState (false);
 
-
   useEffect (() => {
     InstanceOfAxios ('/products/categories', 'GET').then (data =>
       setFilterCategorie (data.categories)
@@ -29,7 +28,6 @@ const ProductList = () => {
       setFilterBrands (data.brands)
     );
   }, []);
-
 
   const ProductRow = ({product}) => (
     <div
@@ -45,7 +43,7 @@ const ProductList = () => {
       <p>{product.brand}</p>
       <p>{product.amount}</p>
       <p>{product.category}</p>
-      <p>{product.stock}</p>
+      <p>{product.stock ? product.stock : '-'}</p>
       <p>{product.priceCost}</p>
       <p>{product.priceList}</p>
     </div>
@@ -101,7 +99,13 @@ const ProductList = () => {
 
   return (
     <div className={style.containData}>
-      <FilterDataBase data={data} filters={filters} setFilters={setFilters} filterBrands={filterBrands} filterCategorie={filterCategorie}/>
+      <FilterDataBase
+        data={data}
+        filters={filters}
+        setFilters={setFilters}
+        filterBrands={filterBrands}
+        filterCategorie={filterCategorie}
+      />
 
       <div className={style.titulos}>
         <p>Codigo</p>

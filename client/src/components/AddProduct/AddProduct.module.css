@@ -33,7 +33,7 @@
   width: 80%;
 }
 
-.divInput select{
+.divInput select {
   width: 80%;
   padding: 1rem;
   border-radius: 10px;
@@ -43,4 +43,14 @@
   border-radius: 15px;
   padding: 1rem;
   cursor: pointer;
+}
+
+.divSpanAndInputCheck {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.divSpanAndInputCheck input[type="checkbox"] {
+  transform: scale(2);
 }

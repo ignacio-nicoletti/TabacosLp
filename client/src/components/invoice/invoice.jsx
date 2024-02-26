@@ -2,9 +2,14 @@ import {useEffect, useState} from 'react';
 import style from './invoice.module.css';
 import InstanceOfAxios from '../../utils/intanceAxios';
 import {GetDecodedCookie} from '../../utils/DecodedCookie';
+import FilterInvoince from '../filterInvoice/filterInvoice';
 const Invoice = () => {
   const [invoiceList, setInvoiceList] = useState ([]);
+  const [filteredInvoiceList, setFilteredInvoiceList] = useState ([]);
   const [loading, setLoading] = useState (true);
+  const [listProducts, setListProducts] = useState ({});
+  const [listProductsActive, setListProductsActive] = useState (false);
+  const [selectedDate, setSelectedDate] = useState ('');
 
   useEffect (() => {
     const token = GetDecodedCookie ('cookieToken');
@@ -18,6 +23,7 @@ const Invoice = () => {
           token
         );
         setInvoiceList (response);
+        setFilteredInvoiceList (response); // Inicialmente, ambas listas son iguales
       } catch (error) {
         console.log (error.message);
       } finally {
@@ -55,22 +61,32 @@ const Invoice = () => {
   const ProductRow = ({product}) => (
     <div className={style.dataList}>
       <p>{product._id}</p>
-
       <div className={style.productBox}>
-        {product.products.map (el => (
-          <div className={style.productItem}>
-            <p>{el.title}</p>
-            <p>{el.brand}</p>
-            <p>${el.priceList} </p>
-            <p>{el.unity} U.</p>
-          </div>
-        ))}
+        <button
+          onClick={() => {
+            setListProductsActive (true);
+            setListProducts (product);
+          }}
+        >
+          Ver productos
+        </button>
       </div>
       <p>${formatNumberWithDots (product.priceTotal)}</p>
       <p>{formatDateModal (product.date)}</p>
-
     </div>
   );
+
+  const handleDateChange = selectedDate => {
+    setSelectedDate (selectedDate);
+    if (selectedDate) {
+      const filteredList = invoiceList.filter (
+        el => new Date (el.date).toISOString ().split ('T')[0] === selectedDate
+      );
+      setFilteredInvoiceList (filteredList);
+    } else {
+      setFilteredInvoiceList (invoiceList);
+    }
+  };
 
   return (
     <div className={style.containInvoice}>
@@ -82,7 +98,10 @@ const Invoice = () => {
           : <div>
 
               <div>
-                filtros
+                <FilterInvoince
+                  invoiceList={invoiceList}
+                  onDateChange={handleDateChange}
+                />
               </div>
 
               <div className={style.titulos}>
@@ -92,11 +111,56 @@ const Invoice = () => {
                 <p>Fecha</p>
               </div>
 
-              {invoiceList.map ((el, index) => (
+              {filteredInvoiceList.map ((el, index) => (
                 <ProductRow key={index} product={el} />
               ))}
 
             </div>}
+
+        <div>
+          {listProductsActive
+            ? <div className={style.ContainModalProducts}>
+
+                <div className={style.modalProducts}>
+                  <div className={style.iconClose}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-x"
+                      width="36"
+                      height="36F"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      onClick={() => setListProductsActive (false)}
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M18 6l-12 12" />
+                      <path d="M6 6l12 12" />
+                    </svg>
+                  </div>
+                  <div className={style.titulosModalProducts}>
+                    <p>Titulo</p>
+                    <p>Marca</p>
+                    <p>Precio Lista</p>
+                    <p>Cantidad</p>
+                  </div>
+
+                  {listProducts.products.map (el => (
+                    <div className={style.dataProducts}>
+
+                      <p>{el.title}</p>
+                      <p>{el.brand}</p>
+                      <p>${el.priceList} </p>
+                      <p>{el.unity} U.</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            : ''}
+        </div>
 
       </div>
     </div>
