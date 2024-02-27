@@ -94,10 +94,11 @@ export const UpdateProductById = async (req, res) => {
 export const DeleteProductById = async (req, res) => {
   const { id } = req.params;
   try {
-    await Product.findByIdAndRemove(id);
+    await Product.findByIdAndDelete(id);
 
     return res.status(200).json("producto eliminado");
   } catch (error) {
+    console.log(error);
     res.status(400).json(formatError(error.message));
   }
 };

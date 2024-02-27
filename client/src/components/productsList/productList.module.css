@@ -33,7 +33,7 @@
   border-right: none; /* No aplicar borde a la última columna */
 }
 
-.dataList:hover{
+.dataList:hover {
   background-color: white;
   cursor: pointer;
 }

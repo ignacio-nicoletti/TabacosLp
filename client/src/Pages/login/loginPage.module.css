@@ -11,29 +11,24 @@
   background-color: #906341;
   justify-content: center;
   align-items: center;
-  width: 500px;
-  height: 400px;
+  width: 25%;
+  height: 30%;
   margin-top: 5rem;
   border-radius: 15px;
-  padding: 1rem;
+  padding: 2rem;
+  gap: 15px;
 }
+
 .markLogin h3 {
   font-size: 3rem;
   padding: 0;
   margin: 0;
   margin-bottom: 1rem;
-}
-
-.title {
-  width: 55%;
-  margin-bottom: 0;
-  text-align: start;
-  font-size: 2rem;
   color: white;
 }
 
+
 .markLogin input {
-  /* width: 50%; */
   padding: 1rem;
   border-radius: 10px;
 }
@@ -44,6 +39,8 @@
   margin: 1rem;
   cursor: pointer;
   background-color: white;
+  width: 100%;
+  font-size: 1rem;
 }
 
 .markLogin button:hover {
@@ -57,8 +54,9 @@
 .password {
   display: flex;
   align-items: center;
-  width: 1005;
+  gap:0.5rem
 }
+
 .password input {
   width: 80%;
 }
@@ -73,4 +71,21 @@
 }
 .email input {
   width: 80%;
+}
+
+
+@media (max-width: 870px) {
+  .markLogin {
+    display: flex;
+    flex-direction: column;
+    background-color: #906341;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 30%;
+    margin-top: 5rem;
+    border-radius: 15px;
+    /* padding: 2rem; */
+    gap: 15px;
+  }
 }

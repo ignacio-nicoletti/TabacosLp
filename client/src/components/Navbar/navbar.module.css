@@ -4,6 +4,7 @@
   justify-content: space-between;
   padding-inline: 3rem;
 }
+
 .logo img {
   width: 100px;
 }
@@ -18,4 +19,39 @@
 .link {
   text-decoration: none;
   color: white;
+}
+.DivIconMenu {
+  display: none;
+}
+
+@media only screen and (max-width: 770px) {
+  .containNavbar {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* width: 100%; */
+    padding-inline: 0rem;
+  }
+
+  .options {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0;
+  }
+
+  .options p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .DivIconMenu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    width: 100%;
+  }
+
+  .DivIconMenu svg {
+    padding: 1rem;
+  }
 }

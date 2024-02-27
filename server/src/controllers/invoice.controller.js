@@ -75,11 +75,13 @@ export const UpdateInvoicetById = async (req, res) => {
 
 export const DeleteInvoiceById = async (req, res) => {
   const { id } = req.params;
-  try {
-    await Invoice.findByIdAndRemove(id);
 
-    return res.status(200).json("producto eliminado");
+  try {
+    await Invoice.findByIdAndDelete(id);
+
+    return res.status(200).json("invoice eliminado");
   } catch (error) {
+    console.log(error);
     res.status(400).json(formatError(error.message));
   }
 };

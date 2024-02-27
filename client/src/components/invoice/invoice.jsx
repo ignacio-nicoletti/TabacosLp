@@ -73,6 +73,29 @@ const Invoice = () => {
       </div>
       <p>${formatNumberWithDots (product.priceTotal)}</p>
       <p>{formatDateModal (product.date)}</p>
+      <p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-trash"
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          className={style.iconTrash}
+          onClick={() => habldeDeleteInvoice (product._id)}
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M4 7l16 0" />
+          <path d="M10 11l0 6" />
+          <path d="M14 11l0 6" />
+          <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+          <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+        </svg>
+      </p>
     </div>
   );
 
@@ -86,6 +109,12 @@ const Invoice = () => {
     } else {
       setFilteredInvoiceList (invoiceList);
     }
+  };
+
+  const habldeDeleteInvoice = id => {
+    console.log (id);
+    const token = GetDecodedCookie ('cookieToken');
+    InstanceOfAxios (`/invoice/${id}`, 'DELETE', undefined, token);
   };
 
   return (
@@ -109,14 +138,17 @@ const Invoice = () => {
                 <p>Productos</p>
                 <p>Total</p>
                 <p>Fecha</p>
+                <p>Accion</p>
               </div>
 
-              {filteredInvoiceList.map ((el, index) => (
-                <ProductRow key={index} product={el} />
-              ))}
+              {/* <div className={style.BoxProduct}> */}
+                {filteredInvoiceList.map ((el, index) => (
+                  <ProductRow key={index} product={el} />
+                ))}
+              {/* </div> */}
 
             </div>}
-
+        {/* -------------------------Modal------------------ */}
         <div>
           {listProductsActive
             ? <div className={style.ContainModalProducts}>
@@ -155,12 +187,14 @@ const Invoice = () => {
                       <p>{el.brand}</p>
                       <p>${el.priceList} </p>
                       <p>{el.unity} U.</p>
+
                     </div>
                   ))}
                 </div>
               </div>
             : ''}
         </div>
+        {/* -------------------------Modal------------------ */}
 
       </div>
     </div>

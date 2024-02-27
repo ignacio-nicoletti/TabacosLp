@@ -19,7 +19,7 @@ const LoginPage = () => {
 
   const handleSubmit = async e => {
     e.preventDefault ();
-    Cookies.remove ('cookieToken');//si ya hay token lo borra y actualiza
+    Cookies.remove ('cookieToken'); //si ya hay token lo borra y actualiza
     await InstanceOfAxios ('/login', 'POST', data).then (data => {
       document.cookie =
         encodeURIComponent ('cookieToken') +
@@ -39,65 +39,70 @@ const LoginPage = () => {
       <NavBar />
       <div className={style.containLogin}>
         <div className={style.markLogin}>
-          <h3>Ingresar</h3>
+          <h3>Bienvenidos!</h3>
 
           <div className={style.email}>
-            <p className={style.title}>Email</p>
+
             <input
               type="email"
               value={data.email}
               onChange={handlerData}
               name="email"
+              placeholder="Escribe tu email"
             />
           </div>
 
           <div className={style.passwordContain}>
-            <p className={style.title}>Contraseña</p>
             <div className={style.password}>
-
               <input
                 type={!eyesActive ? 'password' : 'text'}
                 value={data.password}
                 onChange={handlerData}
                 name="password"
+                placeholder="Escribe tu contraseña"
               />
 
-              {eyesActive
-                ? <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="icon icon-tabler icon-tabler-eye-off"
-                    width="36"
-                    height="36"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    onClick={() => setEyesActive (!eyesActive)}
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M10.585 10.587a2 2 0 0 0 2.829 2.828" />
-                    <path d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87" />
-                    <path d="M3 3l18 18" />
-                  </svg>
-                : <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="icon icon-tabler icon-tabler-eye"
-                    width="36"
-                    height="36"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    onClick={() => setEyesActive (!eyesActive)}
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                    <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                  </svg>}
+              <div
+                className={style.eyeIcon}
+                onClick={() => setEyesActive (!eyesActive)}
+              >
+                {eyesActive
+                  ? <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-eye-off"
+                      width="36"
+                      height="36"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      onClick={() => setEyesActive (!eyesActive)}
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M10.585 10.587a2 2 0 0 0 2.829 2.828" />
+                      <path d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87" />
+                      <path d="M3 3l18 18" />
+                    </svg>
+                  : <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-eye"
+                      width="36"
+                      height="36"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      onClick={() => setEyesActive (!eyesActive)}
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                      <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                    </svg>}
+              </div>
             </div>
           </div>
           <button onClick={handleSubmit}>
