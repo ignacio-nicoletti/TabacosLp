@@ -4,6 +4,7 @@ import InstanceOfAxios from '../../utils/intanceAxios';
 import FilterDataBase from '../filterDataBase/filterDataBase';
 import EditProductModal from '../EditProductModal/EditProductModal';
 import {GetDecodedCookie} from '../../utils/DecodedCookie';
+import Swal from 'sweetalert2';
 
 const ProductList = () => {
   const [data, setData] = useState ([]);
@@ -38,7 +39,7 @@ const ProductList = () => {
         style={{
           wordWrap: 'break-word',
           overflow: 'hidden',
-          textOverflow: 'ellipsis'
+          textOverflow: 'ellipsis',
         }}
       >
         {product.description}
@@ -47,8 +48,8 @@ const ProductList = () => {
       <p>{product.amount}</p>
       <p>{product.category}</p>
       <p>{product.stock ? product.stock : '-'}</p>
-      <p>{product.priceCost}</p>
-      <p>{product.priceList}</p>
+      <p>{product.priceCost.toLocaleString ().replace (',', '.')}</p>
+      <p>{product.priceList.toLocaleString ().replace (',', '.')}</p>
       <p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -148,8 +149,27 @@ const ProductList = () => {
 
   const habldeDeleteProduct = id => {
     console.log (id);
-    const token = GetDecodedCookie ('cookieToken');
-    InstanceOfAxios (`/products/${id}`, 'DELETE', undefined, token);
+
+    Swal.fire ({
+      title: 'Estas seguro que quieres borrarlo?',
+      // text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Si, borrar',
+    }).then (result => {
+      if (result.isConfirmed) {
+        Swal.fire ({
+          title: 'Eliminado!',
+          text: 'producto eliminada.',
+          icon: 'success',
+        });
+        const token = GetDecodedCookie ('cookieToken');
+        InstanceOfAxios (`/products/${id}`, 'DELETE', undefined, token);
+      }
+    });
   };
 
   return (

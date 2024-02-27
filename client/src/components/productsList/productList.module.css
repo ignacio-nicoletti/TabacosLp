@@ -5,6 +5,7 @@
   margin-top: 3rem;
   overflow-y: scroll;
 }
+
 .titulos {
   background-color: #603e20;
   border-radius: 15px;
@@ -15,9 +16,11 @@
 .dataList {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 8px;
   border-bottom: 1px solid #ddd;
-  align-items: center;
+  margin-bottom: 1rem;
+  border-radius: 15px;
 }
 
 .titulos p,

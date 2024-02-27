@@ -186,7 +186,7 @@ const Facturacion = () => {
                 name="importe"
               />
             </div>
-            <div className={style.divInputs}>
+            <div className={style.divFacturar}>
               <button onClick={() => handleAddGenericProduct ()}>
                 Agregar Prod. Generico
               </button>
@@ -235,8 +235,8 @@ const Facturacion = () => {
                     : el.title}
                 </p>
                 <p>{el.amount ? el.amount : '-'}</p>
-                <p>{el.priceCost ? el.priceCost : '-'}</p>
-                <p>{el.priceList}</p>
+                <p>{el.priceCost ? el.priceCost.toLocaleString ().replace (',', '.') : '-'}</p>
+                <p>{el.priceList.toLocaleString ().replace (',', '.')}</p>
                 <p>
                   <input
                     type="text"
@@ -275,7 +275,7 @@ const Facturacion = () => {
           </div>
           <div className={style.importeBox}>
             <span>Importe total</span>
-            <p>${total ? total : 0}</p>
+            <p>${total ? total.toLocaleString ().replace (',', '.') : 0}</p>
           </div>
         </div>
       </div>

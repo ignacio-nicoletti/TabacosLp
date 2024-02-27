@@ -102,6 +102,7 @@ const EditProductModal = ({
             value={data.code}
             onChange={handlerFilters}
             name="code"
+            maxLength={20}
           />
           <span>Titulo</span>
           <input
@@ -109,6 +110,7 @@ const EditProductModal = ({
             value={data.title}
             onChange={handlerFilters}
             name="title"
+            maxLength={40}
           />
           <span>Descripcion</span>
           <input
@@ -116,6 +118,7 @@ const EditProductModal = ({
             value={data.description}
             onChange={handlerFilters}
             name="description"
+            maxLength={40}
           />
           <span>Marca</span>
           <select name="brand" onChange={handlerFilters} id="brandSelect">
@@ -127,6 +130,7 @@ const EditProductModal = ({
             value={data.brand}
             onChange={handlerFilters}
             name="brand"
+            maxLength={20}
           />
           <span>Cantidad</span>
           <input
@@ -134,6 +138,7 @@ const EditProductModal = ({
             value={data.amount}
             onChange={handlerFilters}
             name="amount"
+            maxLength={20}
           />
           <span>Categoria</span>
           <select
@@ -151,6 +156,7 @@ const EditProductModal = ({
             value={data.category}
             onChange={handlerFilters}
             name="category"
+            maxLength={20}
           />
           <span>Stock</span>
           <input

@@ -77,11 +77,12 @@ const NavBar = () => {
               <path d="M4 18l16 0" />
             </svg>}
       </div>
-      <div className={style.logo}>
+
+      <div className={!menuActive?style.logo:style.logoInactive}>
         <img src={logo} alt="" />
       </div>
 
-      <div className={style.options}>
+      <div className={!menuActive?style.options:style.optionsActive}>
         <NavLink to="/" className={style.link}>
           <p>Inicio</p>
         </NavLink>

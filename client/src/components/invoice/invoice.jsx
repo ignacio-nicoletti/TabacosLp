@@ -3,6 +3,8 @@ import style from './invoice.module.css';
 import InstanceOfAxios from '../../utils/intanceAxios';
 import {GetDecodedCookie} from '../../utils/DecodedCookie';
 import FilterInvoince from '../filterInvoice/filterInvoice';
+import Swal from 'sweetalert2';
+
 const Invoice = () => {
   const [invoiceList, setInvoiceList] = useState ([]);
   const [filteredInvoiceList, setFilteredInvoiceList] = useState ([]);
@@ -51,13 +53,6 @@ const Invoice = () => {
     return formattedDate;
   };
 
-  const formatNumberWithDots = number => {
-    const formattedNumber = new Intl.NumberFormat ('es-ES', {
-      maximumFractionDigits: 0,
-    }).format (number);
-    return formattedNumber.replace (',', '.');
-  };
-
   const ProductRow = ({product}) => (
     <div className={style.dataList}>
       <p>{product._id}</p>
@@ -71,7 +66,7 @@ const Invoice = () => {
           Ver productos
         </button>
       </div>
-      <p>${formatNumberWithDots (product.priceTotal)}</p>
+      <p>${product.priceTotal.toLocaleString ().replace (',', '.')}</p>
       <p>{formatDateModal (product.date)}</p>
       <p>
         <svg
@@ -111,10 +106,38 @@ const Invoice = () => {
     }
   };
 
+  const handleMonthChange = selectedDate => {
+    if (selectedDate) {
+      const filteredList = invoiceList.filter (
+        el => new Date (el.date).toISOString ().slice (0, 7) === selectedDate
+      );
+      setFilteredInvoiceList (filteredList);
+    } else {
+      setFilteredInvoiceList (invoiceList);
+    }
+  };
+
   const habldeDeleteInvoice = id => {
-    console.log (id);
-    const token = GetDecodedCookie ('cookieToken');
-    InstanceOfAxios (`/invoice/${id}`, 'DELETE', undefined, token);
+    Swal.fire ({
+      title: 'Estas seguro que quieres borrarlo?',
+      // text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Si, borrar',
+    }).then (result => {
+      if (result.isConfirmed) {
+        Swal.fire ({
+          title: 'Eliminado!',
+          text: 'Factura eliminada.',
+          icon: 'success',
+        });
+        const token = GetDecodedCookie ('cookieToken');
+        InstanceOfAxios (`/invoice/${id}`, 'DELETE', undefined, token);
+      }
+    });
   };
 
   return (
@@ -129,7 +152,8 @@ const Invoice = () => {
               <div>
                 <FilterInvoince
                   invoiceList={invoiceList}
-                  onDateChange={handleDateChange}
+                  onDayChange={handleDateChange}
+                  onMonthChange={handleMonthChange}
                 />
               </div>
 
@@ -142,9 +166,9 @@ const Invoice = () => {
               </div>
 
               {/* <div className={style.BoxProduct}> */}
-                {filteredInvoiceList.map ((el, index) => (
-                  <ProductRow key={index} product={el} />
-                ))}
+              {filteredInvoiceList.map ((el, index) => (
+                <ProductRow key={index} product={el} />
+              ))}
               {/* </div> */}
 
             </div>}
@@ -184,7 +208,7 @@ const Invoice = () => {
                     <div className={style.dataProducts}>
 
                       <p>{el.title}</p>
-                      <p>{el.brand}</p>
+                      <p>{el.brand ? el.brand : '-'}</p>
                       <p>${el.priceList} </p>
                       <p>{el.unity} U.</p>
 

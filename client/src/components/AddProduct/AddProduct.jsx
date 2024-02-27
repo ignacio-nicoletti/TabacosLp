@@ -92,6 +92,7 @@ const AddProduct = () => {
             name="code"
             onChange={handlerData}
             value={data.code}
+            maxLength={20}
           />
         </div>
 
@@ -112,7 +113,7 @@ const AddProduct = () => {
             type="text"
             name="description"
             onChange={handlerData}
-            maxLength={45}
+            maxLength={40}
             value={data.description}
           />
         </div>
@@ -172,6 +173,7 @@ const AddProduct = () => {
             name="category"
             onChange={handlerData}
             value={data.category}
+            maxLength={20}
           />
         </div>
 
@@ -186,6 +188,7 @@ const AddProduct = () => {
             name="brand"
             value={data.brand}
             onChange={handlerData}
+            maxLength={20}
           />
         </div>
 
@@ -197,6 +200,7 @@ const AddProduct = () => {
             onChange={handlerData}
             placeholder="Ej. 30gr "
             value={data.amount}
+            maxLength={20}
           />
         </div>
       </div>

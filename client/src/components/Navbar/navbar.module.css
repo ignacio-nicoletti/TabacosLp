@@ -20,6 +20,9 @@
   text-decoration: none;
   color: white;
 }
+
+.logoInactive,
+.optionsActive,
 .DivIconMenu {
   display: none;
 }
@@ -29,7 +32,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* width: 100%; */
     padding-inline: 0rem;
   }
 

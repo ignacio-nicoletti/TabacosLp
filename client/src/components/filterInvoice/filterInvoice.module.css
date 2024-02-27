@@ -1,8 +1,17 @@
-.filterInvoinceContain{
-    padding: 1rem;
+.filterInvoiceContain {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-.filterInvoinceContain select{
-    padding: 1rem;
-    border-radius: 10px;
+.filterInvoiceContain select {
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.filterInvoiceContain p {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
 }

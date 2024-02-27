@@ -28,9 +28,6 @@
   border-right: 1px solid #ddd;
 }
 
-.BoxProduct {
-}
-
 .dataList {
   display: flex;
   justify-content: center;
@@ -48,6 +45,7 @@
   border-inline: 1px solid #ddd;
   flex: 1;
   text-align: center;
+  margin: 5px;
 }
 
 .productBox {
