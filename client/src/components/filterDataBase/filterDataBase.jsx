@@ -2,12 +2,14 @@ import {useState} from 'react';
 import style from './filterDataBase.module.css';
 import {GetDecodedCookie} from '../../utils/DecodedCookie';
 import InstanceOfAxios from '../../utils/intanceAxios';
+import Swal from 'sweetalert2';
 
 const FilterDataBase = ({
   filters,
   setFilters,
   filterCategorie,
   filterBrands,
+  fetchData 
 }) => {
   const [activePriceModal, setActivePriceModal] = useState (false);
   const [inputs, setInputs] = useState ({
@@ -35,6 +37,16 @@ const FilterDataBase = ({
   const handlerModifPrice = () => {
     const token = GetDecodedCookie ('cookieToken');
     InstanceOfAxios ('/products', 'PUT', inputs, token);
+    fetchData ();
+    Swal.fire ({
+      title: '¡Guardado!',
+      text: 'El producto se ha guardado correctamente.',
+      icon: 'success',
+    });
+  
+    setActivePriceModal(false)
+  
+  
   };
 
   return (

@@ -21,6 +21,7 @@ const ProductList = () => {
   const [filterBrands, setFilterBrands] = useState ([]);
   const [productSelect, setProductSelect] = useState ({});
   const [editActive, setEditActive] = useState (false);
+  
 
   useEffect (() => {
     InstanceOfAxios ('/products/categories', 'GET').then (data =>
@@ -99,18 +100,18 @@ const ProductList = () => {
     </div>
   );
 
-  useEffect (() => {
-    const fetchData = async () => {
-      try {
-        const response = await InstanceOfAxios ('/products', 'GET');
-        setData (response);
-      } catch (error) {
-        setError (error.message);
-      } finally {
-        setLoading (false);
-      }
-    };
+  const fetchData = async () => {
+    try {
+      const response = await InstanceOfAxios ('/products', 'GET');
+      setData (response);
+    } catch (error) {
+      setError (error.message);
+    } finally {
+      setLoading (false);
+    }
+  };
 
+  useEffect (() => {
     fetchData ();
   }, []);
 
@@ -147,9 +148,8 @@ const ProductList = () => {
     [data, filters, setFilters]
   );
 
-  const habldeDeleteProduct = id => {
-    console.log (id);
 
+  const habldeDeleteProduct = id => {
     Swal.fire ({
       title: 'Estas seguro que quieres borrarlo?',
       // text: "You won't be able to revert this!",
@@ -168,6 +168,7 @@ const ProductList = () => {
         });
         const token = GetDecodedCookie ('cookieToken');
         InstanceOfAxios (`/products/${id}`, 'DELETE', undefined, token);
+        fetchData ();
       }
     });
   };
@@ -180,6 +181,7 @@ const ProductList = () => {
         setFilters={setFilters}
         filterBrands={filterBrands}
         filterCategorie={filterCategorie}
+        fetchData={fetchData}
       />
 
       <div className={style.titulos}>
@@ -208,6 +210,7 @@ const ProductList = () => {
             productSelect={productSelect}
             filterCategorie={filterCategorie}
             filterBrands={filterBrands}
+            fetchData={ fetchData}
           />
         : ''}
 

@@ -8,7 +8,7 @@ import Facturacion from '../../components/Facturation/Facturation';
 import Invoice from '../../components/invoice/invoice';
 
 const HomeAdmin = () => {
-  const [option, setOption] = useState ('Facturacion');
+  const [option, setOption] = useState ('Facturacion'|| 'Agregar Producto'||'Ventas'||'Base de datos');
 
   return (
     <div className={style.contain}>
@@ -43,7 +43,11 @@ const HomeAdmin = () => {
             </div>
 
             <div
-              className={style.buttonOptions}
+              className={
+                option === 'Ventas'
+                  ? `${style.buttonOptions} ${style.marker}`
+                  : style.buttonOptions
+              }
               onClick={() => setOption ('Ventas')}
             >
               <p>
@@ -52,7 +56,11 @@ const HomeAdmin = () => {
             </div>
 
             <div
-              className={style.buttonOptions}
+              className={
+                option === 'Base de datos'
+                  ? `${style.buttonOptions} ${style.marker}`
+                  : style.buttonOptions
+              }
               onClick={() => setOption ('Base de datos')}
             >
               <p>

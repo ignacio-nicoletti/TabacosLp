@@ -13,25 +13,26 @@ const Invoice = () => {
   const [listProductsActive, setListProductsActive] = useState (false);
   const [selectedDate, setSelectedDate] = useState ('');
 
+  const fetchData = async () => {
+    try {
+      const token = GetDecodedCookie ('cookieToken');
+      const response = await InstanceOfAxios (
+        '/invoice',
+        'GET',
+        undefined,
+        token
+      );
+      setInvoiceList (response);
+      setFilteredInvoiceList (response); // Inicialmente, ambas listas son iguales
+    } catch (error) {
+      console.log (error.message);
+    } finally {
+      setLoading (false);
+    }
+  };
   useEffect (() => {
-    const token = GetDecodedCookie ('cookieToken');
+   
 
-    const fetchData = async () => {
-      try {
-        const response = await InstanceOfAxios (
-          '/invoice',
-          'GET',
-          undefined,
-          token
-        );
-        setInvoiceList (response);
-        setFilteredInvoiceList (response); // Inicialmente, ambas listas son iguales
-      } catch (error) {
-        console.log (error.message);
-      } finally {
-        setLoading (false);
-      }
-    };
 
     fetchData ();
   }, []);
@@ -66,7 +67,9 @@ const Invoice = () => {
           Ver productos
         </button>
       </div>
-      <p>${product.priceTotal.toLocaleString ().replace (',', '.')}</p>
+      <p style={{borderRight: 'none'}}>
+        ${product.priceTotal.toLocaleString ().replace (',', '.')}
+      </p>
       <p>{formatDateModal (product.date)}</p>
       <p>
         <svg
@@ -136,6 +139,7 @@ const Invoice = () => {
         });
         const token = GetDecodedCookie ('cookieToken');
         InstanceOfAxios (`/invoice/${id}`, 'DELETE', undefined, token);
+        fetchData ();
       }
     });
   };

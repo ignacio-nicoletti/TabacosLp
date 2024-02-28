@@ -38,5 +38,6 @@
 .marker{
   background-color: #603e20;
   color: white;
+  border: 2px solid black;
 }
 

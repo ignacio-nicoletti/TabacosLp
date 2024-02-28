@@ -9,6 +9,7 @@ const EditProductModal = ({
   productSelect,
   filterCategorie,
   filterBrands,
+  fetchData,
 }) => {
   const [data, setData] = useState ({
     code: productSelect.code,
@@ -60,9 +61,6 @@ const EditProductModal = ({
         icon: 'success',
       });
       setEditActive (false);
-      setTimeout (() => {
-        window.location.reload ();
-      }, 2000);
     } else {
       Swal.fire ({
         title: 'Atencion!',
@@ -70,6 +68,7 @@ const EditProductModal = ({
         icon: 'warning',
       });
     }
+    fetchData ();
   };
 
   return (
