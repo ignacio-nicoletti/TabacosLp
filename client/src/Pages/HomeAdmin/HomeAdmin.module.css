@@ -12,7 +12,7 @@
 .Program {
   background-color: #906341;
   width: 100%;
-  height: 800px;
+  height: auto;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -27,17 +27,34 @@
 
 .buttonOptions {
   border-radius: 15px;
-  width: 100%;
+  flex: 1;
   background-color: white;
   display: flex;
   justify-content: center;
   border-inline: 1px solid black;
   cursor: pointer;
   font-size: 1.5rem;
+  text-align: center;
+  align-items: center;
+  padding-inline: 0.5rem;
 }
-.marker{
+.marker {
   background-color: #603e20;
   color: white;
   border: 2px solid black;
 }
 
+@media only screen and (max-width: 770px) {
+  .ContainProgram {
+    padding: 1rem;
+  }
+
+  .options {
+    display: none;
+  }
+
+  .Program {
+    flex-direction: column;
+    padding: 0rem;
+  }
+}

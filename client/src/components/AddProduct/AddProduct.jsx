@@ -129,7 +129,7 @@ const AddProduct = () => {
               id=""
               checked={stockActive}
               onChange={() => setStockActive (!stockActive)}
-              />
+            />
           </div>
           <input
             type="number"
@@ -204,10 +204,12 @@ const AddProduct = () => {
           />
         </div>
       </div>
+      <div className={style.BoxButonAdd}>
 
-      <button onClick={handleSubmit}>
-        Agregar Producto
-      </button>
+        <button onClick={handleSubmit}>
+          Agregar Producto
+        </button>
+      </div>
     </div>
   );
 };

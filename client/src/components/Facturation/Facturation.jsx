@@ -159,7 +159,7 @@ const Facturacion = () => {
           <div className={style.SideBar}>
 
             <div className={style.divInputs}>
-              <span>Codigo</span>
+              <span>Codigo productos</span>
               <input
                 type="text"
                 onChange={handlerFilters}
@@ -194,7 +194,7 @@ const Facturacion = () => {
             </div>
 
             <div className={style.divFacturar}>
-              <button onClick={handlerSubmit}>Facturar</button>
+              <button onClick={handlerSubmit}>Cargar venta</button>
             </div>
 
           </div>

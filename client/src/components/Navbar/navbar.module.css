@@ -21,39 +21,50 @@
   color: white;
 }
 
-.logoInactive,
-.optionsActive,
-.DivIconMenu {
+/* navbar  mobile */
+
+.containNavbarMobile {
+  background-color: #906341;
   display: none;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.DivIconMenuMobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 1rem;
+}
+
+.optionsMobileInactive {
+  display: none;
+}
+
+.optionsMobileActive {
+  flex-direction: column;
+  padding: 1rem;
+  gap: 0;
+  font-size: 2rem;
+  align-items: center;
+}
+
+.optionsMobile p {
+  margin: 0;
+  padding: 0;
+}
+
+.logoMobile img {
+  width: 50px;
 }
 
 @media only screen and (max-width: 770px) {
   .containNavbar {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-inline: 0rem;
+    display: none;
   }
-
-  .options {
-    flex-direction: column;
-    padding: 1rem;
-    gap: 0;
-  }
-
-  .options p {
-    margin: 0;
-    padding: 0;
-  }
-
-  .DivIconMenu {
+  .containNavbarMobile {
     display: flex;
-    justify-content: flex-end;
-    align-items: end;
-    width: 100%;
-  }
-
-  .DivIconMenu svg {
-    padding: 1rem;
   }
 }

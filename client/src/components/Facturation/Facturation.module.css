@@ -4,6 +4,7 @@
   height: 100%;
   border-radius: 15px;
   padding: 1rem;
+ 
 }
 
 .program {
@@ -118,4 +119,9 @@ cursor: pointer;
 .DivProductTitles p:last-child,
 .divProduct p:last-child {
   border-right: none; /* No aplicar borde a la última columna */
+}
+
+
+.divProduct input[type="checkbox"] {
+  cursor: pointer;
 }

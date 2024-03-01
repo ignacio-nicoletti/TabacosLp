@@ -12,7 +12,7 @@ const HomeAdmin = () => {
 
   return (
     <div className={style.contain}>
-      <NavBarAdmin />
+      <NavBarAdmin setOption={setOption} option={option}/>
 
       <div className={style.ContainProgram}>
         <div className={style.Program}>

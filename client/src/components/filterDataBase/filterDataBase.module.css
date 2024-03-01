@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
 }
+
 .divFilter svg {
   cursor: pointer;
 }
@@ -71,7 +72,7 @@
   align-items: center;
 }
 
-.BoxInputs select{
+.BoxInputs select {
   width: 90%;
   padding: 0.5rem;
   border-radius: 10px;
@@ -85,8 +86,6 @@
   width: 100%;
 }
 
-
-
 .inputAndspan {
   width: 100%;
   display: flex;
@@ -99,4 +98,35 @@
   border-radius: 15px;
   width: 100%;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 770px) {
+  .containFilters {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0rem;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  .divFilter {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+  }
+  .DivModifPrice {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+  }
+
+  .divFilter input,
+  .divFilter select,
+  .DivModifPrice button {
+    padding: 1rem;
+    border-radius: 10px;
+    width: 100%;
+  }
+
 }
