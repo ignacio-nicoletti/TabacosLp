@@ -1,12 +1,14 @@
 .containFilters {
   display: flex;
   justify-content: space-evenly;
-  padding: 1.5rem;
+  padding: 1rem;
+  gap:10px
 }
 
 .divFilter {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .divFilter svg {
@@ -16,11 +18,13 @@
 .divFilter input {
   padding: 1rem;
   border-radius: 10px;
+  width: 200px;
 }
 
 .divFilter select {
   padding: 1rem;
   border-radius: 10px;
+  width: 200px;
 }
 
 .DivModifPrice {
@@ -28,6 +32,7 @@
   align-items: center;
 }
 .DivModifPrice button {
+  width: 200px;
   padding: 1rem;
   border-radius: 10px;
   cursor: pointer;
@@ -100,14 +105,40 @@
   cursor: pointer;
 }
 
+.iconAndInput {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 200px;
+}
+
+.CancelToggleIcon {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #000000;
+}
+
+
+@media only screen and (max-width: 1120px) {
+  .containFilters {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0rem;
+    padding-bottom: 1rem;
+  }
+
+}
+
+
 @media only screen and (max-width: 770px) {
   .containFilters {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0rem;
+    flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 1.5rem;
+    padding: 0rem;
+    padding-bottom: 1rem;
   }
 
   .divFilter {
@@ -115,18 +146,10 @@
     align-items: center;
     /* justify-content: center; */
   }
+
   .DivModifPrice {
     display: flex;
     align-items: center;
-    /* justify-content: center; */
+    justify-content: center;
   }
-
-  .divFilter input,
-  .divFilter select,
-  .DivModifPrice button {
-    padding: 1rem;
-    border-radius: 10px;
-    width: 100%;
-  }
-
 }

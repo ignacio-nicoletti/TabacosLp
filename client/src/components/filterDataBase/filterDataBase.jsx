@@ -3,13 +3,15 @@ import style from './filterDataBase.module.css';
 import {GetDecodedCookie} from '../../utils/DecodedCookie';
 import InstanceOfAxios from '../../utils/intanceAxios';
 import Swal from 'sweetalert2';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faXmark} from '@fortawesome/free-solid-svg-icons';
 
 const FilterDataBase = ({
   filters,
   setFilters,
   filterCategorie,
   filterBrands,
-  fetchData 
+  fetchData,
 }) => {
   const [activePriceModal, setActivePriceModal] = useState (false);
   const [inputs, setInputs] = useState ({
@@ -43,69 +45,47 @@ const FilterDataBase = ({
       text: 'El producto se ha guardado correctamente.',
       icon: 'success',
     });
-  
-    setActivePriceModal(false)
-  
-  
+
+    setActivePriceModal (false);
   };
 
   return (
     <div className={style.containFilters}>
 
       <div className={style.divFilter}>
-        <input
-          type="text"
-          placeholder="Codigo de barra"
-          name="code"
-          onChange={handlerFilters}
-          value={filters.code}
-        />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="icon icon-tabler icon-tabler-x"
-          width="36"
-          height="36"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          onClick={() => setFilters ({...filters, code: ''})}
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M18 6l-12 12" />
-          <path d="M6 6l12 12" />
-        </svg>
+        <div className={style.iconAndInput}>
+          <input
+            type="text"
+            placeholder="Codigo de barra"
+            name="code"
+            onChange={handlerFilters}
+            value={filters.code}
+          />
+          <FontAwesomeIcon
+            icon={faXmark}
+            onClick={() => setFilters ({...filters, code: ''})}
+            className={style.CancelToggleIcon}
+          />
+
+        </div>
       </div>
 
       <div className={style.divFilter}>
-        <input
-          type="text"
-          placeholder="Titulo"
-          onChange={handlerFilters}
-          name="title"
-          value={filters.title}
-        />
-        {' '}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="icon icon-tabler icon-tabler-x"
-          width="36"
-          height="36"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          onClick={() => setFilters ({...filters, title: ''})}
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M18 6l-12 12" />
-          <path d="M6 6l12 12" />
+        <div className={style.iconAndInput}>
+          <input
+            type="text"
+            placeholder="Titulo"
+            onChange={handlerFilters}
+            name="title"
+            value={filters.title}
+          />
 
-        </svg>
+          <FontAwesomeIcon
+            icon={faXmark}
+            onClick={() => setFilters ({...filters, title: ''})}
+            className={style.CancelToggleIcon}
+          />
+        </div>
       </div>
 
       <div className={style.divFilter}>
@@ -154,8 +134,6 @@ const FilterDataBase = ({
               </div>
 
               <div className={style.BoxInputs}>
-
-              
 
                 <span>Precio de compra</span>
                 <div className={style.inputAndspan}>
