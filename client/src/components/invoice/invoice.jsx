@@ -31,9 +31,6 @@ const Invoice = () => {
     }
   };
   useEffect (() => {
-   
-
-
     fetchData ();
   }, []);
 
@@ -56,7 +53,7 @@ const Invoice = () => {
 
   const ProductRow = ({product}) => (
     <div className={style.dataList}>
-      <p>{product._id}</p>
+      <p className={style.displayMobileTitle}>{product._id}</p>
       <div className={style.productBox}>
         <button
           onClick={() => {
@@ -67,10 +64,22 @@ const Invoice = () => {
           Ver productos
         </button>
       </div>
+      <div className={`${style.detailDisplayMobile}`}>
+        <button
+          onClick={() => {
+            setListProductsActive (true);
+            setListProducts (product);
+          }}
+        >
+          Ver detalle
+        </button>
+      </div>
       <p style={{borderRight: 'none'}}>
         ${product.priceTotal.toLocaleString ().replace (',', '.')}
       </p>
-      <p>{formatDateModal (product.date)}</p>
+      <p className={style.displayMobileTitle}>
+        {formatDateModal (product.date)}
+      </p>
       <p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -162,10 +171,11 @@ const Invoice = () => {
               </div>
 
               <div className={style.titulos}>
-                <p>Codigo Factura</p>
+                <p className={style.displayMobileTitle}>Codigo Factura</p>
                 <p>Productos</p>
+                <p className={`${style.detailDisplayMobile}`}>Ver detalle</p>
                 <p>Total</p>
-                <p>Fecha</p>
+                <p className={style.displayMobileTitle}>Fecha</p>
                 <p>Accion</p>
               </div>
 

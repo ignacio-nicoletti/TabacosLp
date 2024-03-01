@@ -12,6 +12,8 @@ const Facturacion = () => {
     importe: 1,
   });
   const [total, setTotal] = useState ('');
+  const [listProductsActive, setListProductsActive] = useState (false);
+  const [productSelect, setProductSelect] = useState ({});
 
   useEffect (() => {
     fetchData ();
@@ -98,12 +100,12 @@ const Facturacion = () => {
   const handlerEditTitle = elemento => {
     return event => {
       const newTitle = event.target.value;
-      let productIndex = List.findIndex(
-        el => String(el.code) === String(elemento.code)
+      let productIndex = List.findIndex (
+        el => String (el.code) === String (elemento.code)
       );
       if (productIndex >= 0) {
         List[productIndex].title = newTitle;
-        setList([...List]);
+        setList ([...List]);
       }
     };
   };
@@ -193,27 +195,24 @@ const Facturacion = () => {
 
             </div>
 
-            <div className={style.divFacturar}>
-              <button onClick={handlerSubmit}>Cargar venta</button>
-            </div>
-
           </div>
 
           <div className={style.listProduct}>
             <div className={style.DivProductTitles}>
-              <p>Seleccion</p>
-              <p>Codigo</p>
+              <p className={style.listProductMobile}>Seleccion</p>
+              <p className={style.listProductMobile}>Codigo</p>
               <p>Titulo</p>
-              <p>Cantidad</p>
-              <p>Precio Compra</p>
+              <p className={style.listProductMobile}>Cantidad</p>
+              <p className={style.listProductMobile}>Precio Compra</p>
               <p>Precio Venta</p>
               <p>Unidad</p>
+              <p className={style.listProductMobileAction}>Accion</p>
 
             </div>
 
             {List.map ((el, index) => (
               <div className={style.divProduct} key={index}>
-                <p>
+                <p className={style.listProductMobile}>
                   <input
                     type="checkbox"
                     name=""
@@ -222,20 +221,28 @@ const Facturacion = () => {
                     onChange={() => handleCheckboxChange (index)}
                   />
                 </p>
-                <p>{el.code ? el.code : '-'}</p>
+                <p className={style.listProductMobile}>
+                  {el.code ? el.code : '-'}
+                </p>
                 <p>
                   {el.generic
                     ? <input
                         type="text"
-                        
                         id=""
                         value={el.title}
-                        onChange={handlerEditTitle(el)}
+                        maxLength={20}
+                        onChange={handlerEditTitle (el)}
                       />
                     : el.title}
                 </p>
-                <p>{el.amount ? el.amount : '-'}</p>
-                <p>{el.priceCost ? el.priceCost.toLocaleString ().replace (',', '.') : '-'}</p>
+                <p className={style.listProductMobile}>
+                  {el.amount ? el.amount : '-'}
+                </p>
+                <p className={style.listProductMobile}>
+                  {el.priceCost
+                    ? el.priceCost.toLocaleString ().replace (',', '.')
+                    : '-'}
+                </p>
                 <p>{el.priceList.toLocaleString ().replace (',', '.')}</p>
                 <p>
                   <input
@@ -244,6 +251,53 @@ const Facturacion = () => {
                     onChange={handlerEditUnity (el)}
                     name="code"
                   />
+                </p>
+                <p className={style.listProductMobileAction}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-list-details"
+                    width="36"
+                    height="36"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    onClick={() => {
+                      setProductSelect (el);
+                      setListProductsActive (true);
+                    }}
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M13 5h8" />
+                    <path d="M13 9h5" />
+                    <path d="M13 15h8" />
+                    <path d="M13 19h5" />
+                    <path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                    <path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                  </svg>
+
+                  {/* <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-trash"
+                    width="36"
+                    height="36"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    onClick={() => handleDeleteSelected ()}
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M4 7l16 0" />
+                    <path d="M10 11l0 6" />
+                    <path d="M14 11l0 6" />
+                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                  </svg> */}
                 </p>
               </div>
             ))}
@@ -273,10 +327,60 @@ const Facturacion = () => {
               <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
             </svg>
           </div>
+
           <div className={style.importeBox}>
             <span>Importe total</span>
             <p>${total ? total.toLocaleString ().replace (',', '.') : 0}</p>
+            <div className={style.divFacturar}>
+              <button onClick={handlerSubmit}>Cargar venta</button>
+            </div>
           </div>
+
+        </div>
+
+        <div>
+          {listProductsActive
+            ? <div className={style.ContainModalProducts}>
+
+                <div className={style.modalProducts}>
+                  <div className={style.iconClose}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-x"
+                      width="36"
+                      height="36F"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      onClick={() => setListProductsActive (false)}
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M18 6l-12 12" />
+                      <path d="M6 6l12 12" />
+                    </svg>
+                  </div>
+                  <div className={style.titulosModalProducts}>
+                    <p>Titulo</p>
+                    <p>Marca</p>
+                    <p>Precio Lista</p>
+                    <p>Cantidad</p>
+                  </div>
+
+                  <div className={style.dataProducts}>
+
+                    <p>{productSelect.title}</p>
+                    <p>{productSelect.brand ? productSelect.brand : '-'}</p>
+                    <p>${productSelect.priceList} </p>
+                    <p>{productSelect.unity} U.</p>
+
+                  </div>
+
+                </div>
+              </div>
+            : ''}
         </div>
       </div>
     </div>

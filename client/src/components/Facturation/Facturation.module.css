@@ -4,16 +4,15 @@
   height: 100%;
   border-radius: 15px;
   padding: 1rem;
- 
 }
 
 .program {
   height: 100%;
-  /* background-color: red; */
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
+
 .sideBarAndListProduct {
   display: flex;
   gap: 15px;
@@ -24,11 +23,14 @@
   background-color: #f8efe3;
   display: flex;
   flex-direction: column;
-  width: 15%;
-  padding-inline: 1rem;
+  padding: 1rem;
   padding-top: 1rem;
   gap: 20px;
   border-radius: 15px;
+}
+
+.SideBar span {
+  width: max-content;
 }
 
 .divInputs {
@@ -42,7 +44,7 @@
   border-radius: 10px;
 }
 
-.divInputs button{
+.divInputs button {
   border-radius: 10px;
   padding: 1rem;
 }
@@ -56,8 +58,9 @@
 
 .listProduct {
   background-color: #f8efe3;
-  width: 90%;
+  width: 100%;
   border-radius: 15px;
+  text-align: center;
 }
 
 .importe {
@@ -69,12 +72,11 @@
   padding: 0.5rem;
   padding-inline: 3rem;
 }
-.trashBox svg{
-cursor: pointer;
+.trashBox svg {
+  cursor: pointer;
 }
-.trashBox svg:hover{
-    color: red;
-
+.trashBox svg:hover {
+  color: red;
 }
 
 .importeBox {
@@ -104,16 +106,16 @@ cursor: pointer;
 }
 
 .DivProductTitles p,
-.divProduct p,
-.divProduct input {
+.divProduct p {
   flex: 1;
   padding: 8px;
-  text-align: center; /* Alinea el texto al centro, puedes ajustarlo según sea necesario */
   border-right: 1px solid #ddd; /* Línea de separación entre columnas */
 }
 
 .divProduct input {
   border: none;
+  padding: 8px;
+  width: 70%;
 }
 
 .DivProductTitles p:last-child,
@@ -121,7 +123,136 @@ cursor: pointer;
   border-right: none; /* No aplicar borde a la última columna */
 }
 
-
 .divProduct input[type="checkbox"] {
   cursor: pointer;
+}
+
+.ContainModalProducts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.iconClose {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 1rem;
+}
+.iconClose svg {
+  cursor: pointer;
+}
+
+.modalProducts {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #906341;
+
+  border: 1px solid #000000;
+  width: 95%;
+  max-width: 650px;
+  max-height: 600px;
+  border-radius: 10px;
+}
+
+.titulosModalProducts {
+  display: flex;
+  justify-content: space-between;
+  background-color: #603e20;
+  border-radius: 15px;
+  color: white;
+  width: 100%;
+}
+
+.titulosModalProducts p {
+  flex: 1;
+  text-align: center;
+  border-right: 1px solid white;
+}
+
+.dataProducts {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dataProducts p {
+  flex: 1;
+  text-align: center;
+  border-right: 1px solid white;
+}
+
+.titulosModalProducts p:last-child,
+.titulosModalProducts p:last-child {
+  border-right: none; /* No aplicar borde a la última columna */
+}
+
+@media only screen and (max-width: 1600px) {
+  .sideBarAndListProduct {
+    flex-direction: column;
+  }
+  .SideBar {
+    flex-wrap: wrap;
+    gap: 0px;
+  }
+  .divProduct input {
+    width: 50%;
+    margin: 0;
+  }
+
+  .divFacturar button{
+    margin-top: 1rem;
+  }
+
+}
+
+.listProductMobileAction {
+  display: none;
+}
+
+@media only screen and (max-width: 770px) {
+  .sideBarAndListProduct {
+    flex-direction: column;
+  }
+
+  .SideBar {
+    flex-wrap: wrap;
+    gap: 0px;
+  }
+  .SideBar button {
+    margin-top: 1rem;
+  }
+
+  .importeBox p {
+    margin: 0;
+  }
+
+  .listProductMobile {
+    display: none;
+  }
+
+  .divProduct {
+    text-align: center;
+  }
+
+  .divProduct p {
+    margin: 0;
+  }
+
+  .divProduct input {
+    width: 50%;
+    margin: 0;
+  }
+
+  .listProductMobileAction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .listProductMobileAction svg {
+    padding-inline: 1rem;
+  }
 }

@@ -54,10 +54,11 @@
   flex: 1;
   justify-content: center;
   align-items: center;
+
 }
 
 .productBox button {
-  width: 30%;
+  width: 100%;
   border-radius: 10px;
   cursor: pointer;
   padding: 0.5rem;
@@ -142,4 +143,44 @@
 
 .iconTrash {
   cursor: pointer;
+}
+
+.detailDisplayMobile {
+  display: none;
+}
+
+@media only screen and (max-width: 1350px) {
+  .displayMobileTitle {
+    display: none;
+  }
+
+  .containInvoice {
+    padding: 0rem;
+  }
+
+  .detailDisplayMobile {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    padding-left: 0.5rem;
+    border-left: 1px solid #ddd;
+  }
+  .detailDisplayMobile button {
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  .productBox {
+    padding: 0.5rem;
+  }
+}
+
+
+@media only screen and (max-width: 500px) {
+  .detailDisplayMobile button,  .productBox button {
+    padding: 1rem;
+  }
+
+ 
 }
